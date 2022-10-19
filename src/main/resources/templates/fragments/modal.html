@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+</head>
+
+
+<div th:fragment="modal" class="modal fade" tabindex="-1" role="dialog" id="modalTour" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content rounded-6 shadow">
+      <div class="modal-body p-5 ">
+        <h2 class="fw-bold mb-5 text-center">What's new</h2>
+
+        <div class="border rounded px-5 py-2 mx-4 my-3 border-2" >
+          <a href="/newPost/newSell"><h5 class="mb-0 text-center">재능 판매하기</h5></a>
+
+        </div>
+        <div class="border rounded px-5 py-2 mx-4 my-3 border-2">
+          <a><h5 class="mb-0 text-center">공모전 모집하기</h5></a>
+
+        </div>
+        <div class="border rounded px-5 py-2 mx-4 my-3 border-2">
+          <a><h5 class="mb-0 text-center">서로의 재능 거래하기</h5></a>
+
+        </div>
+        <div class="border rounded px-5  py-2 mx-4 my-3 border-2">
+          <a><h5 class="mb-0 text-center">재능 의뢰하기</h5></a>
+
+        </div>
+
+        <button type="button" class="btn btn-lg btn-primary mt-3 w-100" data-bs-dismiss="modal">취소하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</html>
