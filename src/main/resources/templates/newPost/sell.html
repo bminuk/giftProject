@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thmeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/layout2}"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>layout5</title>
+  <link rel="stylesheet" type="text/css" href="/css/formbootstrap.css">
+  <link rel="icon" type="image/png" href="/images/icons/favicon.ico"/>
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/vendor/animsition/css/animsition.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/vendor/daterangepicker/daterangepicker.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/css/util.css">
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <!--===============================================================================================-->
+  <style>
+        * {margin: 0; padding: 0;}
+        #wrap {width: 100%; height: 900px; color:#000000; font-size: 25px; text-transform: uppercase; }
+        #banner-wrap {width: 100%; }
+        #content-wrap {width: 100%; }
+
+        /* 자식이 height 값을 가지고 있으면 부모의 height 값은 없어도 된다.
+           width: 100%는 기본 값이기 때문에 없어도 된다.
+        */
+        .banner-container {width: 800px; height: 100px; line-height: 100px; margin: 0 auto; background-color: #001A40; text-align: center; color:#fff; font-size: 15px; border-radius: 27px 27px 0px 0px;}
+        .content-container {width: 800px; height: 600px; margin: 0 auto; background-color: #fff; text-align: left; color:#000000; font-size: 15px; border-radius: 0px 0px 27px 27px; box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);}
+
+        #mar {
+        margin: 0px 30px 30px 30px;
+        }
+
+    </style>
+</head>
+<body>
+<<div layout:fragment="content">
+  <div id="wrap">
+    <div id="banner-wrap">
+      <div class="banner-container" style="font-size: 35px" >판매 서비스</div>
+    </div>
+    <div id="content-wrap">
+      <div class="content-container">
+        <div id="mar" class="form-group">
+          <label class="col-form-label mt-4" for="inputDefault">제목</label>
+          <input type="text" class="form-control" placeholder="판매 서비스명 입력" id="inputDefault">
+          <label for="exampleTextarea" class="form-label mt-4">판매 서비스 작성</label>
+          <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+          <label class="col-form-label mt-4" for="inputDefault">가격 정보</label>
+          <input type="text" class="form-control" placeholder="서비스 가격 입력" id="inputDefault2">
+          <label for="formFile" class="form-label mt-4">이미지 업로드</label>
+          <input class="form-control" type="file" id="formFile">
+          <div style="width: 100%; text-align: center;">
+            <div style="display:inline-block;">
+              <button style="margin-top: 30px;" class="login100-medi-btn">
+                업로드
+              </button>
+              <button style="margin-top: 30px; margin-left: 10px;" class="login100-medi-btn">
+                목록
+              </button>
+              <button style="margin-top: 30px; margin-left: 10px;" class="login100-medi-btn">
+                취소
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
