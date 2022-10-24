@@ -80,7 +80,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User{
     // User의 PrimaryKey
     @Override
     public String getName() {
-        return member.getId()+"";
+        return member.getEmail() + "";
     }
 
 }

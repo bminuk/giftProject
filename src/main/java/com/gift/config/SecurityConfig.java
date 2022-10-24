@@ -1,5 +1,6 @@
 package com.gift.config;
 
+//import com.gift.service.PrincipalOauth2UserService;
 import com.gift.service.PrincipalOauth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
+//임시로 시큐리티 변경("/newPost/**") 페이지 이동 확인하기 위해서~
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {

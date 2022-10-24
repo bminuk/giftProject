@@ -9,13 +9,12 @@ import lombok.ToString;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 
 @Entity
-@Getter
-@Setter
-@ToString
 @Table(name = "member")
-
+@Getter @Setter
+@ToString
 public class Member {
 
     @Id
@@ -23,14 +22,16 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "member_name")
     private String name;
 
-    @Column(unique = true)
+    @Column(unique = true, name = "member_email")
     private String email;
 
+    @Column(name = "member_pw")
     private String password;
 
-
+    @Column(name = "member_role")
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -44,6 +45,28 @@ public class Member {
         member.setRole(Role.USER);
         return member;
 
+    }
+
+    public static Member kakaoMember(String name, String email, String k_password) {
+        Member member = new Member();
+        PasswordEncoder passwordEncoder = new PasswordEncoder() {
+            @Override
+            public String encode(CharSequence rawPassword) {
+                return null;
+            }
+
+            @Override
+            public boolean matches(CharSequence rawPassword, String encodedPassword) {
+                return false;
+            }
+        };
+        member.setName(name);
+        String password = passwordEncoder.encode(k_password);
+        member.setPassword(password);
+        member.setEmail(email);
+        member.setRole(Role.USER);
+
+        return member;
     }
 
 

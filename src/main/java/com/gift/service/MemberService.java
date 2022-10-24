@@ -1,5 +1,6 @@
 package com.gift.service;
 
+//import com.gift.auth.PrincipalDetails;
 import com.gift.auth.PrincipalDetails;
 import com.gift.entity.Member;
 import com.gift.repository.MemberRepository;
@@ -14,7 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class MemberService implements UserDetailsService {
+public class MemberService implements UserDetailsService{
+    //implements UserDetailsService
 
     private final MemberRepository memberRepository;
 
@@ -37,6 +39,12 @@ public class MemberService implements UserDetailsService {
             throw new UsernameNotFoundException(email);
         }
 
-        return new PrincipalDetails(member);
+        return User.builder()
+                .username(member.getEmail())
+                .password(member.getPassword())
+                .roles(member.getRole().toString())
+                .build();
+
+//        return new PrincipalDetails(member);
     }
 }

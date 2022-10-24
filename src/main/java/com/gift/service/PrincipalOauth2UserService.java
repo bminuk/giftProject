@@ -35,17 +35,17 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         //회원가입 진행
         MemberDto memberDto = new MemberDto();
         memberDto.setName(oAuth2User.getAttribute("name").toString());
-        memberDto.setPassword(oAuth2User.getAttribute("sub"));
+        memberDto.setEmail(oAuth2User.getAttribute("sub"));
         memberDto.setEmail(oAuth2User.getAttribute("email"));
 
 
-//        String provider = userRequest.getClientRegistration().getClientId();
-//        String providerId =oAuth2User.getAttribute("sub");
-//        String name = provider+"_"+providerId; //google_00000
+        String provider = userRequest.getClientRegistration().getClientId();
+        String providerId =oAuth2User.getAttribute("sub");
+        String name = provider+"_"+providerId; //google_00000
 //        String password = bCryptPasswordEncoder.encode(providerId);
         String email = oAuth2User.getAttribute("email");
-//        String role = Role.USER.toString();
-//
+        String role = Role.USER.toString();
+
 
 
         Member findMember = memberRepository.findByEmail(email);
@@ -57,7 +57,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             return new PrincipalDetails(newMember,oAuth2User.getAttributes());
 
         }
-        System.out.println("이미가입된 회원이빈다.");
+        System.out.println("이미 가입된 회원입니다.");
         return new PrincipalDetails(findMember,oAuth2User.getAttributes());
     }
 }
