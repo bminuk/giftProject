@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Email;
+import javax.validation.constraints.Email;//백엔드에서 벨리데이션을 설정
 import javax.validation.constraints.NotBlank;
 
 @Getter
