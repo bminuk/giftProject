@@ -92,7 +92,8 @@ public class MemberController {
         return "/member/memberLogin";
     }
 
-    @GetMapping(value = "/callback")
+    //잘좀해봐 신민영
+    @GetMapping(value = "/callback") 
     public @ResponseBody UserDetails kakaoCallback(String code) { //response body를 붙인 건 데이터를 리턴해주는 컨트롤러 함수가 됨
         //POST방식으로 key=value 데이터를 요청(카카오쪽으로)
         //a태그를 이용한 전달방식은 무조건 get방식
