@@ -2,14 +2,12 @@ package com.gift.entity;
 
 import com.gift.constant.Role;
 import com.gift.dto.MemberDto;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
-import java.math.BigInteger;
 
 @Entity
 @Table(name = "member")

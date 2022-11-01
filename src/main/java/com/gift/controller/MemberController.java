@@ -2,16 +2,21 @@ package com.gift.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gift.auth.PrincipalDetails;
 import com.gift.dto.MemberDto;
 import com.gift.entity.Member;
 import com.gift.model.KakaoProfile;
 import com.gift.model.OAuthToken;
+import com.gift.repository.MemberRepository;
 import com.gift.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +37,9 @@ public class MemberController {
 
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private MemberRepository memberRepository;
 
     @GetMapping(value = "/join")
     public String memberForm(Model model){
@@ -62,6 +70,7 @@ public class MemberController {
         return "redirect:/";
     }
 
+
     @GetMapping(value = "/login")
     public String loginMember(){
         return "/member/memberLogin";
@@ -84,7 +93,7 @@ public class MemberController {
     }
 
     @GetMapping(value = "/callback")
-    public @ResponseBody String kakaoCallback(String code) { //response body를 붙인 건 데이터를 리턴해주는 컨트롤러 함수가 됨
+    public @ResponseBody UserDetails kakaoCallback(String code) { //response body를 붙인 건 데이터를 리턴해주는 컨트롤러 함수가 됨
         //POST방식으로 key=value 데이터를 요청(카카오쪽으로)
         //a태그를 이용한 전달방식은 무조건 get방식
         //Retrofit2
@@ -167,9 +176,15 @@ public class MemberController {
                 kakaoProfile.getKakao_account().getEmail(),
                 garbagePassword.toString());
         //db에 넣고 회원가입이 폼 길이수정 혹은 공백제한 수정하기
-        memberService.saveMember(member);
 
-        return response2.getBody();
+        Member findMember = memberRepository.findByEmail(kakaoProfile.getKakao_account().getEmail());
+        if(findMember==null){
+
+        memberService.saveMember(member);
+        return new PrincipalDetails(member);
+        }
+
+        return new PrincipalDetails(member);
     }
 
 }

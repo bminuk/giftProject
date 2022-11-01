@@ -5,7 +5,6 @@ import com.gift.auth.PrincipalDetails;
 import com.gift.entity.Member;
 import com.gift.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,7 +26,7 @@ public class MemberService implements UserDetailsService{
     public void validateDuplicateMember(Member member){
         Member findMember = memberRepository.findByEmail(member.getEmail());
         if(findMember != null){
-            throw new IllegalStateException("이미 가입된 회원입니다.");
+            throw new IllegalStateException("이미 가입된 회원입니다. 카톡 로그인에서도 문제인거에요?");
         }
     }
 
