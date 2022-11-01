@@ -94,7 +94,7 @@
                 </button>
             </div>
           <div class="container-login100-form-btn">
-            <a href="https://kauth.kakao.com/oauth/authorize?client_id=49366b42c85f5715fc1c150d5082ded5&redirect_uri=http://localhost:80/members/callback&response_type=code"><img height="38px" width="190" src="/images/icon/kakao_login_medium_wide.png"/></a>
+            <a href="http://localhost:80/oauth2/authorization/kakao"><img height="38px" width="190" src="/images/icon/kakao_login_medium_wide.png"/></a>
             <a href="/oauth2/authorization/google"><img style="margin-left: 5px" src="/images/icon/google_logo.png" height="38px" width="190"></a>
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
           </div>
