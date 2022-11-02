@@ -32,8 +32,6 @@ public class Sell {
     @Column(name = "sell_money")
     private int money;
 
-
-
     }
 
 
