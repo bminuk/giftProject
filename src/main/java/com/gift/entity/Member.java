@@ -45,27 +45,27 @@ public class Member {
 
     }
 
-    public static Member kakaoMember(String name, String email, String k_password) {
-        Member member = new Member();
-        PasswordEncoder passwordEncoder = new PasswordEncoder() {
-            @Override
-            public String encode(CharSequence rawPassword) {
-                return null;
-            }
-
-            @Override
-            public boolean matches(CharSequence rawPassword, String encodedPassword) {
-                return false;
-            }
-        };
-        member.setName(name);
-        String password = passwordEncoder.encode(k_password);
-        member.setPassword(password);
-        member.setEmail(email);
-        member.setRole(Role.USER);
-
-        return member;
-    }
+//    public static Member kakaoMember(String name, String email, String k_password) {
+//        Member member = new Member();
+//        PasswordEncoder passwordEncoder = new PasswordEncoder() {
+//            @Override
+//            public String encode(CharSequence rawPassword) {
+//                return null;
+//            }
+//
+//            @Override
+//            public boolean matches(CharSequence rawPassword, String encodedPassword) {
+//                return false;
+//            }
+//        };
+//        member.setName(name);
+//        String password = passwordEncoder.encode(k_password);
+//        member.setPassword(password);
+//        member.setEmail(email);
+//        member.setRole(Role.USER);
+//
+//        return member;
+//    }
 
 
 

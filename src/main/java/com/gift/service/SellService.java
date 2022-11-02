@@ -2,7 +2,6 @@ package com.gift.service;
 
 import com.gift.dto.SellDto;
 import com.gift.entity.Sell;
-import com.gift.repository.MemberRepository;
 import com.gift.repository.SellRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

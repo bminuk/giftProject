@@ -1,7 +1,6 @@
 package com.gift.service;
 
 import com.gift.auth.PrincipalDetails;
-import com.gift.constant.Role;
 import com.gift.dto.MemberDto;
 import com.gift.entity.Member;
 import com.gift.repository.MemberRepository;
@@ -19,7 +18,6 @@ import java.util.Map;
 public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
 
-
     @Autowired
     private MemberRepository memberRepository;
 
@@ -34,8 +32,9 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         String password = null;
 
         //provider가 누구인지 판별
-        if(provider.equals("kakao")){
-            System.out.println("카카오 로그인을 진행하였습니다");
+        if (provider.equals("kakao")) {
+            //카카오 로그인 부분
+
             Map<String, Object> attributes = oAuth2User.getAttributes();
 
             Map<String, Object> kakao_account = (Map<String, Object>) attributes.get("kakao_account");
@@ -44,19 +43,22 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             Map<String, Object> properties = (Map<String, Object>) attributes.get("properties");
             name = (String) properties.get("nickname");
 
-            password = name+email;
+            password = name + email;
 
-            System.out.println(kakao_account);
+            System.out.println("카카오 로그인을 진행하였습니다");
+            System.out.println("email : " + email);
+            System.out.println("name : " + name);
 
-        }else if(provider.equals("google")){
+        } else if (provider.equals("google")) {
             //구글 로그인 부분
-        System.out.println("구글 로그인을 진행하였습니다");
-        System.out.println("userRequest : "+userRequest.getClientRegistration());
-        System.out.println("userRequest : "+super.loadUser(userRequest).getAttributes());
-        System.out.println(oAuth2User.getAttribute("name").toString());
-        name=oAuth2User.getAttribute("name").toString();
-        email = oAuth2User.getAttribute("email");
-        password = oAuth2User.getAttribute("sub");
+
+            name = oAuth2User.getAttribute("name").toString();
+            email = oAuth2User.getAttribute("email");
+            password = oAuth2User.getAttribute("sub");
+
+            System.out.println("구글 로그인을 진행하였습니다");
+            System.out.println("email : " + email);
+            System.out.println("name : " + name);
 
         }
 
@@ -68,14 +70,14 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
 
         Member findMember = memberRepository.findByEmail(email);
-        if(findMember==null){
+        if (findMember == null) {
             memberRepository.save(Member.createMember(memberDto, new BCryptPasswordEncoder()));
             System.out.println("새로 회원가입한 회원입니다.");
 
             Member newMember = memberRepository.findByEmail(memberDto.getEmail());
-            return new PrincipalDetails(newMember,oAuth2User.getAttributes());
+            return new PrincipalDetails(newMember, oAuth2User.getAttributes());
 
-        }else {
+        } else {
             System.out.println("이미 가입된 회원입니다.");
             return new PrincipalDetails(findMember, oAuth2User.getAttributes());
         }

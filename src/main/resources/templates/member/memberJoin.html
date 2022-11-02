@@ -59,7 +59,7 @@
                         <input class="input100" type="text" th:field="*{name}" placeholder="이름을 입력해주세요.">
                         <p th:if="${#fields.hasErrors('name')}"
                            th:errors="*{name}" class="fieldError">틀린 정보입니다.</p>
-                        <span class="focus-input100"></span>
+
                     </div>
                     <label th:for="email">EMAIL</label>
                     <div class="ex" data-validate="Please enter username" style="margin-top: 10px;">
