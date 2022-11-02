@@ -5,6 +5,7 @@ import com.gift.dto.SellDto;
 import com.gift.service.ContestService;
 import com.gift.service.SellService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,9 +35,9 @@ public class NewPostController {
     }
 
     @PostMapping(value = "/sell")
-    public String saveSell(SellDto sellDto){
+    public String saveSell(SellDto sellDto, Authentication authentication){
         System.out.println(sellDto);
-        sellService.saveSell(sellDto);
+        sellService.saveSell(sellDto, authentication);
         return "redirect:/";
     }
 
@@ -48,10 +49,6 @@ public class NewPostController {
     }
     @PostMapping(value = "/contest")
     public String saveContest(ContestDto contestDto){
-        System.out.println("=========================>>>>>"+contestDto.getTitle());
-        System.out.println("=========================>>>>>"+contestDto.getContent());
-        System.out.println("=========================>>>>>"+contestDto.getSkill());
-        System.out.println("contestDto 비어 있어요???????????");
         contestService.saveContest(contestDto);
         return "redirect:/";
     }
