@@ -1,7 +1,7 @@
-package com.gift.entity;
+package com.gift.entity.member;
 
 import com.gift.constant.Role;
-import com.gift.dto.MemberDto;
+import com.gift.dto.member.MemberDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

@@ -1,7 +1,6 @@
 package com.gift.controller;
-
-import com.gift.entity.Sell;
-import com.gift.repository.SellRepository;
+import com.gift.entity.sell.Sell;
+import com.gift.repository.sell.SellRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

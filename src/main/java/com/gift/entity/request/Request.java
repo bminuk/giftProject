@@ -1,6 +1,6 @@
-package com.gift.entity;
+package com.gift.entity.request;
 
-import com.gift.constant.Role;
+import com.gift.entity.member.Member;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -30,7 +30,7 @@ public class Request {
 
     @Column(nullable = false, name = "request_content")
     private String requestContent;
-//
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;

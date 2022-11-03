@@ -1,9 +1,9 @@
-package com.gift.service;
+package com.gift.service.member;
 
 //import com.gift.auth.PrincipalDetails;
 import com.gift.auth.PrincipalDetails;
-import com.gift.entity.Member;
-import com.gift.repository.MemberRepository;
+import com.gift.entity.member.Member;
+import com.gift.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

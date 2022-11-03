@@ -1,4 +1,4 @@
-package com.gift.dto;
+package com.gift.dto.member;
 
 import lombok.Getter;
 import lombok.Setter;

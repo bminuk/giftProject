@@ -1,5 +1,6 @@
-package com.gift.entity;
+package com.gift.entity.request;
 
+import com.gift.entity.request.Request;
 import lombok.Getter;
 import lombok.Setter;
 

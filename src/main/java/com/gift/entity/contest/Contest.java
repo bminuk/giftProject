@@ -1,5 +1,6 @@
-package com.gift.entity;
+package com.gift.entity.contest;
 
+import com.gift.entity.member.Member;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -38,5 +39,9 @@ public class Contest {
 
     @Column(name= "contest_skill")
     private String skill;       //작성자 보유 기술
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
 }

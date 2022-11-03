@@ -1,11 +1,9 @@
-package com.gift.dto;
+package com.gift.dto.request;
 
-import com.gift.entity.RequestImg;
+import com.gift.entity.request.RequestImg;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
-
-import javax.persistence.Column;
 
 @Getter @Setter
 public class RequestImgDto {

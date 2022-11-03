@@ -1,14 +1,11 @@
-package com.gift.dto;
+package com.gift.dto.request;
 
-import com.gift.entity.Member;
-import com.gift.entity.Request;
+import com.gift.entity.request.Request;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +32,7 @@ public class RequestDto {
     private List<Long> requestImgIds = new ArrayList<>();
     private static ModelMapper modelMapper = new ModelMapper();
 
+    //model mapper를 사용하면 빌더로 하나하나 객체 매핑하지 않아도 됨
     public Request createRequest() {
         return modelMapper.map(this, Request.class);
     }

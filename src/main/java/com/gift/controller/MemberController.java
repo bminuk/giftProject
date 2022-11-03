@@ -1,11 +1,11 @@
 package com.gift.controller;
 
-import com.gift.dto.MemberDto;
-import com.gift.entity.Member;
+import com.gift.dto.member.MemberDto;
+import com.gift.entity.member.Member;
 //import com.gift.model.KakaoProfile;
 //import com.gift.model.OAuthToken;
-import com.gift.repository.MemberRepository;
-import com.gift.service.MemberService;
+import com.gift.repository.member.MemberRepository;
+import com.gift.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,5 +1,6 @@
-package com.gift.entity;
+package com.gift.entity.sell;
 
+import com.gift.entity.member.Member;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

@@ -1,7 +1,8 @@
-package com.gift.service;
+package com.gift.service.request;
 
-import com.gift.entity.RequestImg;
-import com.gift.repository.RequestImgRepository;
+import com.gift.entity.request.RequestImg;
+import com.gift.repository.request.RequestImgRepository;
+import com.gift.service.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class RequestImgService {
         //파일 업로드
         if(!StringUtils.isEmpty(oriImgName)) {
             imgName = fileService.uploadFile(requestImgLocation, oriImgName, requestImgFile.getBytes());
-            imgUrl = "/requestimg/request/" + imgName;
+            imgUrl = "/projectimg/request/" + imgName;
         }
 
         //이미지 정보 저장

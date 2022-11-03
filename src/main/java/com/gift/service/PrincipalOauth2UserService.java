@@ -1,9 +1,9 @@
 package com.gift.service;
 
 import com.gift.auth.PrincipalDetails;
-import com.gift.dto.MemberDto;
-import com.gift.entity.Member;
-import com.gift.repository.MemberRepository;
+import com.gift.dto.member.MemberDto;
+import com.gift.entity.member.Member;
+import com.gift.repository.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
