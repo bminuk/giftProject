@@ -3,7 +3,6 @@ package com.gift.controller;
 import com.gift.dto.ContestDto;
 import com.gift.dto.RequestDto;
 import com.gift.dto.SellDto;
-import com.gift.repository.RequestRepository;
 import com.gift.service.ContestService;
 import com.gift.service.RequestService;
 import com.gift.service.SellService;

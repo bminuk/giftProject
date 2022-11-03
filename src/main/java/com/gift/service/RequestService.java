@@ -1,7 +1,6 @@
 package com.gift.service;
 
 import com.gift.dto.RequestDto;
-import com.gift.dto.RequestImgDto;
 import com.gift.entity.Request;
 import com.gift.entity.RequestImg;
 import com.gift.repository.RequestImgRepository;
