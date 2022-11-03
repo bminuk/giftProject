@@ -12,11 +12,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-  
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.validation.Valid;
+import java.util.List;
 
 @RequestMapping("/newPost")
 @Controller
@@ -70,13 +70,18 @@ public class NewPostController {
     }
 
     @PostMapping(value = "/request")
-    public String newRequest(@Valid RequestDto requestDto, BindingResult bindingResult, Model model) {
+    public String newRequest(@Valid RequestDto requestDto, BindingResult bindingResult, Model model,
+                             @RequestPart(value="requestImgFile", required=false)List<MultipartFile> requestImgFileList) {
         if(bindingResult.hasErrors()) {
             return "/newPost/request";
         }
 
+        if(requestImgFileList.get(0).isEmpty() && requestDto.getId() == null) {
+            model.addAttribute("errorMessage", "이미지 삽입은 필수적입니다~");
+        }
+
         try {
-            requestService.saveRequest(requestDto);
+            requestService.saveRequest(requestDto, requestImgFileList);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "글 등록 중 에러 발생하였습니다.");
             return "/newPost/request";
