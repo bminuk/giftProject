@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thmeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layouts/layout1}"
 >
 <head>
@@ -248,9 +247,25 @@
 <!--            </div>-->
         </div>
     </div>
+    <!--페이지-->
+    <nav aria-label="Page navigation example" >
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled" th:classappend="${startPage == sells.pageable.pageNumber + 1} ? 'disabled'">
+                <a class="page-link" th:href="@{/(page=${sells.pageable.pageNumber - 1})}" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item" th:each="num : ${#numbers.sequence(startPage, endPage)}">
+                <a class="page-link" th:href="@{/(page=${num-1})}" th:text="${num}">1</a>
+            </li>
+
+            <li class="page-item" th:classappend="${endPage == sells.pageable.pageNumber + 1} ? 'disabled'">
+                <a class="page-link" th:href="@{/(page=${sells.pageable.pageNumber + 1})}">Next</a>
+            </li>
+        </ul>
+    </nav>
 
 
 </div>
+
 
 
 </body>
