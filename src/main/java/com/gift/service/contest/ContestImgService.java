@@ -35,7 +35,7 @@ public class ContestImgService {
         }
 
         //이미지 정보 저장
-        contestImg.updateRequestImg(oriImgName, imgName, imgUrl);
+        contestImg.updateContestImg(oriImgName, imgName, imgUrl);
         contestImgRepository.save(contestImg);
     }
 }

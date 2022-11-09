@@ -31,9 +31,6 @@ public class Contest {
     @Column(name= "contest_promoter")
     private String promoter;    //주최자
 
-    @Column(name= "contest_content")
-    private String content;     //내용
-
     @Column(name= "contest_target")
     private String target;      //지원 가능 대상
 

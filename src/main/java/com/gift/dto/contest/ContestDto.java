@@ -16,6 +16,7 @@ import java.util.List;
 
 @Getter @Setter
 public class ContestDto {
+    private Long id;
 
     private String title;
 
@@ -24,8 +25,6 @@ public class ContestDto {
     private String term;        //접수 기간
 
     private String promoter;    //주최자
-
-    private String content;     //내용
 
     private String target;      //지원 가능 대상
 

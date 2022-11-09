@@ -33,7 +33,7 @@ public class ContestImg {
     @JoinColumn(name="contest_id")
     private Contest contest;
 
-    public void updateRequestImg(String contestOriImgName, String contestImgName, String contestImgUrl) {
+    public void updateContestImg(String contestOriImgName, String contestImgName, String contestImgUrl) {
         this.contestImgName = contestImgName;
         this.contestImgName = contestImgName;
         this.contestImgUrl = contestImgUrl;

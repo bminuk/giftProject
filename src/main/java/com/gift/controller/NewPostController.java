@@ -1,9 +1,11 @@
 package com.gift.controller;
 
 import com.gift.dto.contest.ContestDto;
+import com.gift.dto.exchange.ExchangeDto;
 import com.gift.dto.request.RequestDto;
 import com.gift.dto.sell.SellDto;
 import com.gift.service.contest.ContestService;
+import com.gift.service.exchange.ExchangeService;
 import com.gift.service.request.RequestService;
 import com.gift.service.sell.SellService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,21 +32,13 @@ public class NewPostController {
     @Autowired
     private RequestService requestService;
 
+    @Autowired
+    private ExchangeService exchangeService;
+
 
     @GetMapping(value = "/newSell")
     public String newSell(){
         return "/newPost/newSell";
-    }
-
-    @GetMapping(value = "/contest")
-    public String contest(Model model){
-        model.addAttribute("contestDto",new ContestDto());
-        return "/newPost/contest";
-    }
-    @PostMapping(value = "/contest")
-    public String saveContest(ContestDto contestDto){
-//        contestService.saveContest(contestDto);
-        return "redirect:/";
     }
 
     @GetMapping(value = "/request")
@@ -96,6 +90,55 @@ public class NewPostController {
         } catch (Exception e) {
             model.addAttribute("errorMessage", "글 등록 중 에러 발생하였습니다.");
             return "/newPost/request";
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping(value = "/contest")
+    public String contest(Model model){
+        model.addAttribute("contestDto",new ContestDto());
+        return "/newPost/contest";
+    }
+    @PostMapping(value = "/contest")
+    public String saveContest(@Valid ContestDto contestDto, BindingResult bindingResult, Authentication authentication, Model model,
+                              @RequestParam(value = "contestImgFile", required=false) List<MultipartFile> contestImgFileList){
+//        contestService.saveContest(contestDto);
+        if(bindingResult.hasErrors()) {
+            return "/newPost/contest";
+        }
+        if(contestImgFileList.get(0).isEmpty() && contestDto.getId() == null) {
+            model.addAttribute("errorMessage", "이미지 삽입은 필수적입니다~");
+        }
+
+        try {
+            contestService.saveContest(contestDto, contestImgFileList, authentication);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "글 등록 중 에러 발생하였습니다.");
+            return "/newPost/contest";
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping(value = "/exchange")
+    public String exchange(Model model){
+        model.addAttribute("exchangeDto",new ExchangeDto());
+        return "/newPost/exchange";
+    }
+    @PostMapping(value = "/exchange")
+    public String saveExchange(@Valid ExchangeDto exchangeDto, BindingResult bindingResult, Authentication authentication, Model model,
+                              @RequestParam(value = "exchangeImgFile", required=false) List<MultipartFile> exchangeImgFileList){
+        if(bindingResult.hasErrors()) {
+            return "/newPost/exchange";
+        }
+        if(exchangeImgFileList.get(0).isEmpty() && exchangeDto.getId() == null) {
+            model.addAttribute("errorMessage", "이미지 삽입은 필수적입니다~");
+        }
+
+        try {
+            exchangeService.saveExchange(exchangeDto, exchangeImgFileList, authentication);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "글 등록 중 에러 발생하였습니다.");
+            return "/newPost/exchange";
         }
         return "redirect:/";
     }
