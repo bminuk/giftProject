@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
 <!--    <link rel="stylesheet" type="text/css" href="/css/formbootstrap.css">-->
     <link rel="stylesheet" type="text/css" href="/css/util.css">
@@ -29,9 +30,19 @@
           <button style="margin-top: 30px;" class="login100-medi-btn">
               가격 정보
           </button>
+          <img src="/images/icons/puppy2.jpg" height="200px" width="250">
+          <img src="/images/icons/puppy3.jpg" height="200px" width="250">
+          <p th:text="${sell.title}" ></p>
+          <p th:text="${sell.content}" ></p>
+          <p th:text="${sell.money}" ></p>
+          <p th:text="${member.name}" ></p>
+          <p th:text="${member.email}" ></p>
+          <p th:text="${member.role}" ></p>
+
+
       </div>
-              <img src="/images/icons/puppy2.jpg" height="200px" width="250">
-              <img src="/images/icons/puppy3.jpg" height="200px" width="250">
+
+
   </div>
   <div id="side_right">
       <h1 style="font-size: 25px; margin-top: 50px; text-align: left; margin-left: 35px; margin-bottom: 20px; color: #000000;">판매자 정보</h1>

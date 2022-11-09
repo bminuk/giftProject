@@ -157,8 +157,9 @@
             <div class="col-lg-4 col-sm-6 mb-4" th:each="sell : ${sells}">
                 <!-- Portfolio item 1-->
                 <div class="portfolio-item" >
-                    <!--data-bs-toggle="modal" 나중에 섬네일 눌렀을 때 모달로 하고 싶으면 아래의 a태그 클래스에 이거 사용해야함 부트스트랩 인듯-->
-                    <a class="portfolio-link" th:href="@{/details/sellDetail}">
+                    <!--data-bs-toggle="modal" 나중에 섬네일 눌렀을 때 모달로 하고 싶으면 아래의 a태그 클래스에 이거 사용해야함 부트스트랩 인듯
+                    th:href="@{/details/sellDetail}"-->
+                    <a class="portfolio-link" th:onclick="|location.href='@{/details/sellDetail/{sellId}(sellId=${sell.id})}'|">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
