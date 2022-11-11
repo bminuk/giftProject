@@ -1,5 +1,6 @@
 package com.gift.entity.request;
 
+import com.gift.constant.Category;
 import com.gift.entity.member.Member;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,5 +35,10 @@ public class Request {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "request_category")
+    private Category requestCategory;
+
 
 }

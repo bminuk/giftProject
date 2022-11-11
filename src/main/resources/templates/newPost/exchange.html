@@ -21,7 +21,7 @@
            width: 100%는 기본 값이기 때문에 없어도 된다.
         */
         .banner-container {width: 800px; height: 100px; line-height: 100px; margin: 0 auto; background-color: #001A40; text-align: center; color:#fff; font-size: 15px; border-radius: 27px 27px 0px 0px;}
-        .content-container {width: 800px; height: 600px; margin: 0 auto; background-color: #fff; text-align: left; color:#000000; font-size: 15px; border-radius: 0px 0px 27px 27px; box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);}
+        .content-container {width: 800px; height: 650px; margin: 0 auto; background-color: #fff; text-align: left; color:#000000; font-size: 15px; border-radius: 0px 0px 27px 27px; box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);}
 
         #mar {
         margin: 0px 30px 30px 30px;
@@ -72,6 +72,16 @@
           <form role="form" method="post" enctype="multipart/form-data" th:object="${exchangeDto}">
 
             <input type="hidden" th:field="*{id}">
+            <div class="form-group">
+              <label class="col-form-label mt-4" for="inputDefault">분야</label>
+              <select th:field="*{exchangeCategory}" class="custom-select">
+                <option value="VIDEO">영상</option>
+                <option value="IT">IT</option>
+                <option value="DESIGN">디자인</option>
+                <option value="LANGUAGE">언어</option>
+                <option value="HOBBY">취미</option>
+              </select>
+            </div>
             <label class="col-form-label mt-4" for="inputDefault">원하는 상대의 재능</label>
             <input type="text" class="form-control" th:field="*{exchangeTitle}" placeholder="판매 서비스명 입력" id="inputDefault">
             <p th:if="${#fields.hasErrors('exchangeTitle')}" th:errors="*{exchangeTitle}" class="fieldError">Incorrect data</p>

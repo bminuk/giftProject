@@ -1,5 +1,6 @@
 package com.gift.dto.sell;
 
+import com.gift.constant.Category;
 import com.gift.dto.request.RequestDto;
 import com.gift.dto.request.RequestImgDto;
 import com.gift.entity.member.Member;
@@ -25,6 +26,8 @@ public class SellDto {
     private String content;
 
     private int money;
+
+    private Category sellCategory;
 
     //저장 후 수정할 때 이미지 정보 저장하는 리스트
     private List<SellImgDto> sellImgDtoList = new ArrayList<>();

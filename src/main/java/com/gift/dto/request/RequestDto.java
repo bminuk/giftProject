@@ -1,5 +1,6 @@
 package com.gift.dto.request;
 
+import com.gift.constant.Category;
 import com.gift.entity.request.Request;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +24,9 @@ public class RequestDto {
     private String requestDate;
 
     private String requestContent;
-    
+
+    private Category requestCategory;
+
     //저장 후 수정할 때 이미지 정보 저장하는 리스트
     private List<RequestImgDto> requestImgDtoList = new ArrayList<>();
 

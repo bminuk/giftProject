@@ -1,5 +1,6 @@
 package com.gift.entity.sell;
 
+import com.gift.constant.Category;
 import com.gift.entity.member.Member;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,6 +33,10 @@ public class Sell {
 
     @Column(name = "sell_money")
     private int money;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sell_category")
+    private Category sellCategory;
 
     }
 

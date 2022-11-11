@@ -30,11 +30,11 @@ public class ContestService {
 
         Contest contest = new Contest();
         contest.setTitle(contestDto.getTitle());
-        contest.setField(contestDto.getField());
         contest.setPromoter(contestDto.getPromoter());
         contest.setTerm(contestDto.getTerm());
         contest.setTarget(contestDto.getTarget());
         contest.setSkill(contestDto.getSkill());
+        contest.setContestCategory(contestDto.getContestCategory());
 
         PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
         Member member = principalDetails.getUser();

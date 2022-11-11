@@ -28,6 +28,7 @@ public class SellService {
         sell.setContent(sellDto.getContent());
         sell.setTitle(sellDto.getTitle());
         sell.setMoney(sellDto.getMoney());
+        sell.setSellCategory(sellDto.getSellCategory());
 
         PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
         Member member = principalDetails.getUser();

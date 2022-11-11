@@ -28,4 +28,9 @@ public class DetailsController {
         return "/details/sellDetail";
     }
 
+    @GetMapping(value = "/requestDetail")
+    public String requestDetail(){
+        return "/details/requestDetail";
+    }
+
 }

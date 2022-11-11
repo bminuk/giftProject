@@ -1,5 +1,6 @@
 package com.gift.entity.contest;
 
+import com.gift.constant.Category;
 import com.gift.entity.member.Member;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,9 +23,6 @@ public class Contest {
     @Column(name= "contest_title")
     private String title;
 
-    @Column(name= "contest_field")
-    private String field;       //분야
-
     @Column(name= "contest_term")
     private String term;       //접수 기간 나중에 Sting 말고 Date 같은걸로 받아야 할듯? 입력폼도 그거에 맞게 설정해줘야 할 듯
 
@@ -41,4 +39,7 @@ public class Contest {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "contest_category")
+    private Category contestCategory;
 }

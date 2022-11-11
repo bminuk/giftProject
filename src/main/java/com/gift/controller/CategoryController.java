@@ -34,4 +34,9 @@ public class CategoryController {
         return "category/hobby";
     }
 
+    @GetMapping(value = "/allContest")
+    public String contest(){
+        return "category/allContest";
+    }
+
 }

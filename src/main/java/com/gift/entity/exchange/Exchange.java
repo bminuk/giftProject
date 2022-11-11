@@ -1,5 +1,6 @@
 package com.gift.entity.exchange;
 
+import com.gift.constant.Category;
 import com.gift.entity.member.Member;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,10 @@ public class Exchange {
 
     @Column(nullable = false, name = "exchange_date")
     private String exchangeDate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "exchange_category")
+    private Category exchangeCategory;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")

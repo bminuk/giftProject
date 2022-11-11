@@ -21,7 +21,7 @@
            width: 100%는 기본 값이기 때문에 없어도 된다.
         */
         .banner-container {width: 800px; height: 100px; line-height: 100px; margin: 0 auto; background-color: #001A40; text-align: center; color:#fff; font-size: 15px; border-radius: 27px 27px 0px 0px;}
-        .content-container {width: 800px; height: 800px; margin: 0 auto; background-color: #fff; text-align: left; color:#000000; font-size: 15px; border-radius: 0px 0px 27px 27px; box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);}
+        .content-container {width: 800px; height: 950px; margin: 0 auto; background-color: #fff; text-align: left; color:#000000; font-size: 15px; border-radius: 0px 0px 27px 27px; box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);}
 
         #mar {
         margin: 0px 30px 30px 30px;
@@ -71,10 +71,18 @@
         <div id="mar" class="form-group">
           <form role="form" method="post" enctype="multipart/form-data" th:object="${contestDto}">
             <input type="hidden" th:field="*{id}">
+            <div class="form-group">
+              <label class="col-form-label mt-4" for="inputDefault">분야</label>
+              <select th:field="*{contestCategory}" class="custom-select">
+                <option value="VIDEO">영상</option>
+                <option value="IT">IT</option>
+                <option value="DESIGN">디자인</option>
+                <option value="LANGUAGE">언어</option>
+                <option value="HOBBY">취미</option>
+              </select>
+            </div>
           <label class="col-form-label mt-4" for="inputDefault">공모전 제목</label>
           <input type="text" class="form-control" placeholder="공모전을 입력하세요." id="inputDefault" th:field="*{title}">
-          <label class="col-form-label mt-4" for="inputDefault">분야</label>
-          <input type="text" class="form-control" placeholder="분야를 입력하세요." id="inputDefault2" th:field="*{field}">
           <label class="col-form-label mt-4" for="inputDefault">주최</label>
           <input type="text" class="form-control" placeholder="주최를 입력하세요." id="inputDefault3" th:field="*{promoter}">
           <label class="col-form-label mt-4" for="inputDefault">접수기간</label>
