@@ -26,7 +26,7 @@ public class ExchangeDto {
     private Category exchangeCategory;
 
     //저장 후 수정할 때 이미지 정보 저장하는 리스트
-    private List<RequestImgDto> exchangeImgDtoList = new ArrayList<>();
+    private List<ExchangeImgDto> exchangeImgDtoList = new ArrayList<>();
 
     //이미지 아이디 저장하는 리스트
     //수정 시 이미지 아이디 담아둘 용도

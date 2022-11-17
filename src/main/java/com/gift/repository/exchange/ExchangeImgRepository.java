@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface ExchangeImgRepository extends JpaRepository<ExchangeImg, Long> {
 
-    List<ContestImg> findByExchangeIdOrderByIdAsc(Long exchangeId);
+    List<ExchangeImg> findByExchangeIdOrderByIdAsc(Long exchangeId);
 }

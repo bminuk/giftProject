@@ -69,8 +69,7 @@
     <div id="content-wrap">
       <div class="content-container">
         <div id="mar" class="form-group">
-          <form action="/newPost/sell" role="form" method="post" enctype="multipart/form-data"
-                th:object="${sellDto}">
+          <form role="form" method="post" enctype="multipart/form-data" th:object="${sellDto}">
             <input type="hidden" th:field="*{id}">
             <div class="form-group">
               <label class="col-form-label mt-4" for="inputDefault">분야</label>
@@ -89,11 +88,12 @@
           <label class="col-form-label mt-4" for="inputDefault">가격 정보</label>
           <input type="text" class="form-control" placeholder="서비스 가격 입력" id="inputDefault2" th:field="*{money}">
 
-          <div th:if="${#lists.isEmpty(sellDto.sellImgDtoList)}" style="margin-top: 20px"></div>
+          <div th:if="${#lists.isEmpty(sellDto.sellImgDtoList)}" style="margin-top: 20px">
             <div class="form-group" th:each="num: ${#numbers.sequence(1,1)}">
               <input class="form-control" name="sellImgFile" type="file" id="formFile">
-<!--              <label class="custom-file-label" th:text="이미지 + ${num}"></label>-->
             </div>
+          </div>
+
             <div th:if = "${not #lists.isEmpty(sellDto.sellImgDtoList)}">
               <div class="form-group" th:each="sellImgDto, status: ${sellDto.sellImgDtoList}">
                 <div class="custom-file img-div">

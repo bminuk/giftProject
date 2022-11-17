@@ -1,6 +1,7 @@
 package com.gift.entity.request;
 
 import com.gift.constant.Category;
+import com.gift.dto.request.RequestDto;
 import com.gift.entity.member.Member;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-public class Request {
+public class Request{
 
     @Id
     @Column(name="request_id")
@@ -40,5 +41,12 @@ public class Request {
     @Column(name = "request_category")
     private Category requestCategory;
 
+    public void updateRequest(RequestDto requestDto) {
+        this.requestTitle = requestDto.getRequestTitle();
+        this.requestRange = requestDto.getRequestRange();
+        this.requestDate = requestDto.getRequestDate();
+        this.requestContent = requestDto.getRequestContent();
+        this.requestCategory = requestDto.getRequestCategory();
+    }
 
 }

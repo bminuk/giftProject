@@ -1,6 +1,7 @@
 package com.gift.entity.sell;
 
 import com.gift.constant.Category;
+import com.gift.dto.sell.SellDto;
 import com.gift.entity.member.Member;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,6 +38,13 @@ public class Sell {
     @Enumerated(EnumType.STRING)
     @Column(name = "sell_category")
     private Category sellCategory;
+
+    public void updateSell(SellDto sellDto) {
+        this.title = sellDto.getTitle();
+        this.content = sellDto.getContent();
+        this.money = sellDto.getMoney();
+        this.sellCategory = sellDto.getSellCategory();
+    }
 
     }
 

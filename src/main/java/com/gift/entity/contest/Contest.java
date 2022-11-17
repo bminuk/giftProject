@@ -1,6 +1,7 @@
 package com.gift.entity.contest;
 
 import com.gift.constant.Category;
+import com.gift.dto.contest.ContestDto;
 import com.gift.entity.member.Member;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,4 +43,13 @@ public class Contest {
     @Enumerated(EnumType.STRING)
     @Column(name = "contest_category")
     private Category contestCategory;
+
+    public void updateContest(ContestDto contestDto) {
+        this.title = contestDto.getTitle();
+        this.term = contestDto.getTerm();
+        this.promoter = contestDto.getPromoter();
+        this.target = contestDto.getTarget();
+        this.skill = contestDto.getSkill();
+        this.contestCategory = contestDto.getContestCategory();
+    }
 }

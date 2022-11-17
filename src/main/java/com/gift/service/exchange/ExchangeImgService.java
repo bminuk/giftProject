@@ -1,6 +1,7 @@
 package com.gift.service.exchange;
 
 import com.gift.entity.exchange.ExchangeImg;
+import com.gift.entity.request.RequestImg;
 import com.gift.repository.exchange.ExchangeImgRepository;
 import com.gift.service.FileService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
+
+import javax.persistence.EntityNotFoundException;
 
 @Service
 @RequiredArgsConstructor
@@ -34,8 +37,22 @@ public class ExchangeImgService {
         }
 
         //이미지 정보 저장
-        exchangeImg.updateRequestImg(oriImgName, imgName, imgUrl);
+        exchangeImg.updateExchangeImg(oriImgName, imgName, imgUrl);
         exchangeImgRepository.save(exchangeImg);
+    }
+
+    public void updateExchangeImg(Long exchangeImgId, MultipartFile exchangeImgFile) throws Exception{
+        if(!exchangeImgFile.isEmpty()) {
+            ExchangeImg savedExchangeImg = exchangeImgRepository.findById(exchangeImgId).orElseThrow(EntityNotFoundException::new);
+            if(!StringUtils.isEmpty(savedExchangeImg.getExchangeImgName())) {
+                fileService.deleteFile(exchangeImgLocation+"/"+savedExchangeImg.getExchangeImgName());
+            }
+
+            String oriImgName = exchangeImgFile.getOriginalFilename();
+            String imgName = fileService.uploadFile(exchangeImgLocation, oriImgName, exchangeImgFile.getBytes());
+            String imgUrl = "/projectimg/request/" + imgName;
+            savedExchangeImg.updateExchangeImg(oriImgName, imgName, imgUrl);
+        }
     }
 
 }

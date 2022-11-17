@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thmeleaf/layout"
+      layout:decorate="~{layouts/layout1}"
+>
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@200&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+  <style>
+    .text-center {
+    display: flex;
+    justify-content:center;
+    text-align: center;
+    }
+    .category {
+    width: 700px;
+    height: 100px;
+    background-color: #E0E0E0;
+    text-align: center;
+    border-radius: 27px 27px 27px 27px;
+    margin-bottom: 40px;
+    font-family: 'Gothic A1', sans-serif;
+    display: flex;
+    justify-content:center;
+    }
+    .make {
+    width: 350px;
+    height: 100px;
+    background-color: #E0E0E0;
+    text-align: center;
+    border-radius: 27px 27px 27px 27px;
+    margin-bottom: 40px;
+    margin-left: 20px;
+    font-family: 'Gothic A1', sans-serif;
+    display: flex;
+    justify-content:center;
+    }
+</style>
+
+</head>
+<body>
+
+<div layout:fragment="content">
+
+  <div class="container">
+    <div class="text-center">
+      <div class="category" style="margin-left: 10px;">
+        <a href="category/all"><img src="/images/icon/all.png" width="60" height="60" style="margin-top: 5px;">
+          <h6 class=" fw-bolder text-black mt-2">전체</h6></a>
+        <a href="category/video"><img src="/images/icon/video.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+          <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">영상</h6></a>
+        <a href="category/it"><img src="/images/icon/computer.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+          <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">IT</h6></a>
+        <a href="category/design"><img src="/images/icon/design.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+          <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">디자인</h6></a>
+        <a href="category/lang"><img src="/images/icon/translate.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+          <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">언어</h6></a>
+        <a href="category/hobby"><img src="/images/icon/activity.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+          <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">취미</h6></a>
+      </div>
+      <div class="make">
+        <a href="/category/contestBoard"><img src="/images/icon/contest.png" width="60" height="60" style="margin-top: 5px;">
+          <h6 class=" fw-bolder text-black mt-2">공모전</h6></a>
+        <a href="/category/exchangeBoard"><img src="/images/icon/exchange.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+          <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">교환</h6></a>
+        <a href="/category/requestBoard"><img src="/images/icon/demand.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+          <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">의뢰</h6></a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-sm-6 mb-4" th:each="exchange, status: ${exchanges.getContent()}">
+        <div class="portfolio-item" >
+          <a class="portfolio-link" th:href="'/newPost/exchange/' + ${exchange.id}">
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+            </div>
+            <img th:src="${exchange.exchangeImgUrl}" width="300" height="300">
+          </a>
+          <div class="portfolio-caption">
+            <div class="portfolio-caption-heading" th:text="${exchange.exchangeTitle}">Threads</div>
+<!--            <div class="portfolio-caption-subheading text-muted" th:text="${request.requestContent}">Illustration</div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:with="start=${(exchanges.number/maxPage)*maxPage + 1}, end=(${(exchanges.totalPages == 0) ? 1 : (start + (maxPage - 1) < exchanges.totalPages ? start + (maxPage - 1) : exchanges.totalPages)})" >
+    <ul class="pagination justify-content-center">
+
+      <li class="page-item" th:classappend="${exchanges.number eq 0}?'disabled':''">
+        <a th:href="@{'/category/exchangeBoard/' + '${exchanges.number-1}}" aria-label='Previous' class="page-link">
+          <span aria-hidden='true'>이전</span>
+        </a>
+      </li>
+
+      <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${exchanges.number eq page-1}?'active':''">
+        <a th:href="@{'/category/exchangeBoard/' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
+      </li>
+
+      <li class="page-item" th:classappend="${exchanges.number+1 ge exchanges.totalPages}?'disabled':''">
+        <a th:href="@{'/category/exchangeBoard/' + ${exchanges.number+1}}" aria-label='Next' class="page-link">
+          <span aria-hidden='true'>다음</span>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+
+</div>
+
+
+
+</body>
+</html>
