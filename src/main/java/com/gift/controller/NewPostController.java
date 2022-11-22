@@ -4,7 +4,6 @@ import com.gift.dto.contest.ContestDto;
 import com.gift.dto.exchange.ExchangeDto;
 import com.gift.dto.request.RequestDto;
 import com.gift.dto.sell.SellDto;
-
 import com.gift.service.contest.ContestService;
 import com.gift.service.exchange.ExchangeService;
 import com.gift.service.request.RequestService;
@@ -17,10 +16,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RequestMapping("/newPost")
 @Controller
@@ -71,36 +68,6 @@ public class NewPostController {
         return "redirect:/";
     }
 
-    @GetMapping(value = "/request/{requestId}")
-    public String requestDt1(@PathVariable("requestId") Long requestId, Model model) {
-        try {
-            RequestDto requestDto = requestService.getRequestDt1(requestId);
-            model.addAttribute("requestDto", requestDto);
-        } catch (EntityNotFoundException e) {
-            model.addAttribute("errorMessage", "존재하지 않는 글입니다.");
-            model.addAttribute("requestDto", new RequestDto());
-            return "/newPost/request";
-        }
-        return "/newPost/request";
-    }
-
-    @PostMapping(value = "/request/{requestId}")
-    public String requestUpdate(@Valid RequestDto requestDto, BindingResult bindingResult, @RequestParam("requestImgFile") List<MultipartFile> requestImgFileList, Model model) {
-        if(bindingResult.hasErrors()) {
-            return "/newPost/request";
-        }
-//        if(requestImgFileList.get(0).isEmpty() && requestDto.getId() == null) {
-//            model.addAttribute("errorMessage", "이미지 필수 입력 값입니다.");
-//        }
-         try {
-             requestService.updateRequest(requestDto, requestImgFileList);
-         }catch (Exception e) {
-             model.addAttribute("errorMessage", "수정 중 에러가 발생했습니다.");
-             return "/newPost/request";
-         }
-         return "redirect:/";
-    }
-
     @GetMapping(value = "/sell")
     public String sell(Model model){
         model.addAttribute("sellDto",new SellDto());
@@ -123,32 +90,6 @@ public class NewPostController {
         } catch (Exception e) {
             model.addAttribute("errorMessage", "글 등록 중 에러 발생하였습니다.");
             return "/newPost/request";
-        }
-        return "redirect:/";
-    }
-
-    @GetMapping(value = "/sell/{sellId}")
-    public String sellDt1(@PathVariable("sellId") Long sellId, Model model) {
-        try {
-            SellDto sellDto = sellService.getSellDt1(sellId);
-            model.addAttribute("sellDto", sellDto);
-        } catch (EntityNotFoundException e) {
-            model.addAttribute("errorMessage","존재하지 않는 글입니다.");
-            model.addAttribute("sellDto", new SellDto());
-            return "/newPost/sell";
-        }
-        return "/newPost/sell";
-    }
-    @PostMapping(value = "/sell/{sellId}")
-    public String sellUpdate(@Valid SellDto sellDto, BindingResult bindingResult, @RequestParam("sellImgFile") List<MultipartFile> sellImgFileList, Model model) {
-        if(bindingResult.hasErrors()) {
-            return "/newPost/sell";
-        }
-        try {
-            sellService.updateSell(sellDto, sellImgFileList);
-        } catch (Exception e) {
-            model.addAttribute("errorMessage", "수정 중 에러가 발생했습니다.");
-            return "/newPost/sell";
         }
         return "redirect:/";
     }
@@ -178,35 +119,6 @@ public class NewPostController {
         return "redirect:/";
     }
 
-    //PathVariable는 링크 url 정보
-    @GetMapping(value = "/contest/{contestId}")
-    public String contestDt1(@PathVariable("contestId") Long contestId, Model model) {
-        //조회 모델 담아 뷰로 전달
-        try {
-            ContestDto contestDto = contestService.getContestDt1(contestId);
-            model.addAttribute("contestDto", contestDto);
-        }catch (EntityNotFoundException e) {
-            model.addAttribute("errorMessage", "존재하지 않는 게시글입니다.");
-            model.addAttribute("contestDto", new ContestDto());
-            return "/newPost/contest";
-        }
-        return "/newPost/contest";
-    }
-
-    @PostMapping(value = "/contest/{contestId}")
-    public String contestUpdate(@Valid ContestDto contestDto, BindingResult bindingResult, @RequestParam("contestImgFile") List<MultipartFile> contestImgFileList, Model model) {
-        if(bindingResult.hasErrors()) {
-            return "/newPost/contest";
-        }
-        try {
-            contestService.updateContest(contestDto, contestImgFileList);
-        } catch (Exception e) {
-            model.addAttribute("errorMessage", "수정 중 에러가 발생했습니다.");
-            return "/newPost/contest";
-        }
-        return "redirect:/";
-    }
-
     @GetMapping(value = "/exchange")
     public String exchange(Model model){
         model.addAttribute("exchangeDto",new ExchangeDto());
@@ -230,33 +142,4 @@ public class NewPostController {
         }
         return "redirect:/";
     }
-
-    @GetMapping(value = "/exchange/{exchangeId}")
-    public String exchangeDt1(@PathVariable("exchangeId") Long exchangeId, Model model) {
-        //조회 모델 담아 뷰로 전달
-        try {
-            ExchangeDto exchangeDto = exchangeService.getExchangeDt1(exchangeId);
-            model.addAttribute("exchangeDto", exchangeDto);
-        }catch (EntityNotFoundException e) {
-            model.addAttribute("errorMessage", "존재하지 않는 게시글입니다.");
-            model.addAttribute("exchangeDto", new ExchangeDto());
-            return "/newPost/exchange";
-        }
-        return "/newPost/exchange";
-    }
-
-    @PostMapping(value = "/exchange/{exchangeId}")
-    public String exchangeUpdate(@Valid ExchangeDto exchangeDto, BindingResult bindingResult, @RequestParam("exchangeImgFile") List<MultipartFile> exchangeImgFileList, Model model) {
-        if(bindingResult.hasErrors()) {
-            return "/newPost/exchange";
-        }
-        try {
-            exchangeService.updateExchange(exchangeDto, exchangeImgFileList);
-        } catch (Exception e) {
-            model.addAttribute("errorMessage", "수정 중 에러가 발생했습니다.");
-            return "/newPost/exchange";
-        }
-        return "redirect:/";
-    }
-
 }

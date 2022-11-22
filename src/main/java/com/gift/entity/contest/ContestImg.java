@@ -34,7 +34,7 @@ public class ContestImg {
     private Contest contest;
 
     public void updateContestImg(String contestOriImgName, String contestImgName, String contestImgUrl) {
-        this.contestOriImgName = contestOriImgName;
+        this.contestImgName = contestImgName;
         this.contestImgName = contestImgName;
         this.contestImgUrl = contestImgUrl;
     }

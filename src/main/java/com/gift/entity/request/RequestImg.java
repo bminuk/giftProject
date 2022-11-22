@@ -13,7 +13,7 @@ public class RequestImg {
 
     @Id
     @Column(name="request_img_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name="request_img_name")

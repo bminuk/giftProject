@@ -26,7 +26,7 @@ public class RequestDto {
     private String requestContent;
 
     private Category requestCategory;
-
+    
     //저장 후 수정할 때 이미지 정보 저장하는 리스트
     private List<RequestImgDto> requestImgDtoList = new ArrayList<>();
 
