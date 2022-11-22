@@ -1,6 +1,5 @@
 package com.gift.dto.exchange;
 
-import com.gift.constant.Category;
 import com.gift.dto.request.RequestDto;
 import com.gift.dto.request.RequestImgDto;
 import com.gift.entity.exchange.Exchange;
@@ -23,10 +22,8 @@ public class ExchangeDto {
 
     private String exchangeDate;
 
-    private Category exchangeCategory;
-
     //저장 후 수정할 때 이미지 정보 저장하는 리스트
-    private List<ExchangeImgDto> exchangeImgDtoList = new ArrayList<>();
+    private List<RequestImgDto> exchangeImgDtoList = new ArrayList<>();
 
     //이미지 아이디 저장하는 리스트
     //수정 시 이미지 아이디 담아둘 용도

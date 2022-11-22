@@ -33,7 +33,7 @@ public class ExchangeImg {
     @JoinColumn(name="exchange_id")
     private Exchange exchange;
 
-    public void updateExchangeImg(String exchangeOriImgName, String exchangeImgName, String exchangeImgUrl) {
+    public void updateRequestImg(String exchangeOriImgName, String exchangeImgName, String exchangeImgUrl) {
         this.exchangeOriImgName = exchangeOriImgName;
         this.exchangeImgName = exchangeImgName;
         this.exchangeImgUrl = exchangeImgUrl;

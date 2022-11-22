@@ -10,17 +10,19 @@ import org.modelmapper.ModelMapper;
 @Getter @Setter
 public class ContestImgDto {
 
-    private Long id;
+    private String title;
 
+    private String field;       //분야
 
-    private String contesttImgName;
+    private String term;        //접수 기간
 
-    private String contestOriImgName;
+    private String promoter;    //주최자
 
-    private String conteststImgUrl;
+    private String content;     //내용
 
-    private String contestRepImgYn;
+    private String target;      //지원 가능 대상
 
+    private String skill;       //작성자 보유 기술
 
     private static ModelMapper modelMapper = new ModelMapper();
 
