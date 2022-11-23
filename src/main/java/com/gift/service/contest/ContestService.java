@@ -2,6 +2,7 @@ package com.gift.service.contest;
 
 import com.gift.auth.PrincipalDetails;
 import com.gift.dto.contest.ContestDto;
+import com.gift.dto.contest.MainContestDto;
 import com.gift.entity.contest.Contest;
 import com.gift.entity.contest.ContestImg;
 import com.gift.entity.member.Member;
@@ -9,6 +10,8 @@ import com.gift.entity.sell.SellImg;
 import com.gift.repository.contest.ContestImgRepository;
 import com.gift.repository.contest.ContestRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,4 +60,10 @@ public class ContestService {
 
         return contest.getId();
     }
+
+    @Transactional(readOnly = true)
+    public Page<MainContestDto> getMainContestPage(Pageable pageable) {
+        return contestRepository.getMainContestPage(pageable);
+    }
+
 }
