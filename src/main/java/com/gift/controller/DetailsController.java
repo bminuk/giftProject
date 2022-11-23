@@ -28,9 +28,13 @@ public class DetailsController {
         return "/details/sellDetail";
     }
 
-    @GetMapping(value = "/requestDetail")
-    public String requestDetail(){
-        return "/details/requestDetail";
+    @GetMapping(value = "/sellDetailsTest/{sellId}")
+    public String sellDetailsTest(@PathVariable("sellId")Long sellId, Model model){
+        Sell sell = sellRepository.findById(sellId).get();
+        Member member = sell.getMember();
+        model.addAttribute("member",member);
+        model.addAttribute("sell",sell);
+        return "/details/sellDetailsTest";
     }
 
 }

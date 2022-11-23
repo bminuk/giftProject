@@ -23,6 +23,8 @@ public class Sell {
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
+
+
 //     추후 포트 폴리오 엔티티 생성 후 만들어야 할 듯?
 //    @JoinColumn(name = "portfolio_id")
 //    private Portfolio portfolio;

@@ -1,8 +1,5 @@
 package com.gift.entity.exchange;
 
-import com.gift.constant.Category;
-import com.gift.dto.exchange.ExchangeDto;
-import com.gift.dto.request.RequestDto;
 import com.gift.entity.member.Member;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,19 +28,8 @@ public class Exchange {
     @Column(nullable = false, name = "exchange_date")
     private String exchangeDate;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "exchange_category")
-    private Category exchangeCategory;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-
-    public void updateExchange(ExchangeDto exchangeDto) {
-        this.exchangeTitle = exchangeDto.getExchangeTitle();
-        this.exchangeIntro = exchangeDto.getExchangeIntro();
-        this.exchangeDate = exchangeDto.getExchangeDate();
-        this.exchangeCategory = exchangeDto.getExchangeCategory();
-    }
 
 }

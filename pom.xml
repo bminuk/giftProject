@@ -63,6 +63,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.querydsl/querydsl-jpa -->
 		<dependency>
 			<groupId>com.querydsl</groupId>
@@ -100,6 +101,7 @@
 			<artifactId>modelmapper</artifactId>
 			<version>3.1.0</version>
 		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.querydsl/querydsl-apt -->
 		<dependency>
 			<groupId>com.querydsl</groupId>

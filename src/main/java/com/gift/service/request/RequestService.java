@@ -1,27 +1,20 @@
 package com.gift.service.request;
 
 import com.gift.auth.PrincipalDetails;
-import com.gift.dto.request.MainRequestDto;
 import com.gift.dto.request.RequestDto;
-import com.gift.dto.request.RequestImgDto;
 import com.gift.entity.member.Member;
 import com.gift.entity.request.Request;
 import com.gift.entity.request.RequestImg;
 import com.gift.repository.request.RequestImgRepository;
 import com.gift.repository.request.RequestRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 
-// Controller는 단순하게 요청을 받아 해당 요청에 맞는 Service에 데이터를 주입하는 역할. Service는 자신이 수행해야 할 서비스를 진행
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -52,45 +45,4 @@ public class RequestService {
         }
         return request.getId();
     }
-
-    @Transactional(readOnly = true)
-    public RequestDto getRequestDt1(Long requestId) {
-        List<RequestImg> requestImgList = requestImgRepository.findByRequestIdOrderByIdAsc(requestId);
-        List<RequestImgDto> requestImgDtoList = new ArrayList<>();
-        for(RequestImg requestImg : requestImgList) {
-            RequestImgDto requestImgDto = RequestImgDto.of(requestImg);
-            requestImgDtoList.add(requestImgDto);
-        }
-
-        Request request = requestRepository.findById(requestId)
-                .orElseThrow(EntityNotFoundException::new);
-        RequestDto requestDto = RequestDto.of(request);
-        requestDto.setRequestImgDtoList(requestImgDtoList);
-        return requestDto;
-    }
-
-    public Long updateRequest(RequestDto requestDto, List<MultipartFile> requestImgFileList) throws Exception {
-
-        Request request = requestRepository.findById(requestDto.getId())
-                .orElseThrow(EntityNotFoundException::new);
-        request.updateRequest(requestDto);
-
-        List<Long> requestImgIds = requestDto.getRequestImgIds();
-
-        for(int i=0; i<requestImgFileList.size(); i++) {
-            requestImgService.updateRequestImg(requestImgIds.get(i), requestImgFileList.get(i));
-        }
-        return request.getId();
-    }
-
-//    @Transactional(readOnly = true)
-//    public Page<Request> getAdminRequestPage(RequestSearchDto requestSearchDto, Pageable pageable) {
-//        return requestRepository.getAdminRequestPage(requestSearchDto, pageable);
-//    }
-
-    @Transactional(readOnly = true)
-    public Page<MainRequestDto> getMainRequestPage(Pageable pageable) {
-        return requestRepository.getMainRequestPage(pageable);
-    }
-
 }
