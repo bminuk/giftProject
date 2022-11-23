@@ -54,7 +54,7 @@ public class CategoryController {
 
         model.addAttribute("exchanges", exchanges);
         model.addAttribute("maxPage", 5);
-
+        System.out.println("pppp");
         return "/category/exchangeBoard";
     }
 
