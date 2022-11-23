@@ -71,7 +71,7 @@
     <div class="row">
       <div class="col-lg-4 col-sm-6 mb-4" th:each="request, status: ${requests.getContent()}">
         <div class="portfolio-item" >
-          <a class="portfolio-link" th:href="'/newPost/request/' + ${request.id}">
+            <a class="portfolio-link" th:href="'/newPost/request/' + ${request.id}">
             <div class="portfolio-hover">
               <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
             </div>
@@ -88,13 +88,11 @@
 
   <div th:with="start=${(requests.number/maxPage)*maxPage + 1}, end=(${(requests.totalPages == 0) ? 1 : (start + (maxPage - 1) < requests.totalPages ? start + (maxPage - 1) : requests.totalPages)})" >
     <ul class="pagination justify-content-center">
-
       <li class="page-item" th:classappend="${requests.number eq 0}?'disabled':''">
         <a th:href="@{'/category/requestBoard/' + '${requests.number-1}}" aria-label='Previous' class="page-link">
           <span aria-hidden='true'>이전</span>
         </a>
       </li>
-
       <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${requests.number eq page-1}?'active':''">
         <a th:href="@{'/category/requestBoard/' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
       </li>
@@ -104,7 +102,6 @@
           <span aria-hidden='true'>다음</span>
         </a>
       </li>
-
     </ul>
   </div>
 

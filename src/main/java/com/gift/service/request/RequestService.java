@@ -1,6 +1,7 @@
 package com.gift.service.request;
 
 import com.gift.auth.PrincipalDetails;
+import com.gift.dto.request.MainRequestDto;
 import com.gift.dto.request.RequestDto;
 import com.gift.entity.member.Member;
 import com.gift.entity.request.Request;
@@ -8,6 +9,8 @@ import com.gift.entity.request.RequestImg;
 import com.gift.repository.request.RequestImgRepository;
 import com.gift.repository.request.RequestRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,4 +48,9 @@ public class RequestService {
         }
         return request.getId();
     }
+    @Transactional(readOnly = true)
+    public Page<MainRequestDto> getMainRequestPage(Pageable pageable) {
+        return requestRepository.getMainRequestPage(pageable);
+    }
+
 }

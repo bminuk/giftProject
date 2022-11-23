@@ -2,12 +2,15 @@ package com.gift.service.exchange;
 
 import com.gift.auth.PrincipalDetails;
 import com.gift.dto.exchange.ExchangeDto;
+import com.gift.dto.exchange.MainExchangeDto;
 import com.gift.entity.exchange.Exchange;
 import com.gift.entity.exchange.ExchangeImg;
 import com.gift.entity.member.Member;
 import com.gift.repository.exchange.ExchangeImgRepository;
 import com.gift.repository.exchange.ExchangeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,5 +49,8 @@ public class ExchangeService {
         }
         return exchange.getId();
     }
-
+    @Transactional(readOnly = true)
+    public Page<MainExchangeDto> getMainExchangePage(Pageable pageable) {
+        return exchangeRepository.getMainExchangePage(pageable);
+    }
 }
