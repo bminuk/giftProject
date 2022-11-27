@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="row">
-<!--            <h2 class="section-heading text-uppercase mb-4">Portfolio</h2>-->
+            <!--            <h2 class="section-heading text-uppercase mb-4">Portfolio</h2>-->
             <div class="col-lg-4 col-sm-6 mb-4" th:each="sell : ${sells}">
                 <!-- Portfolio item 1-->
                 <div class="portfolio-item" >
@@ -91,7 +91,7 @@
         </div>
     </div>
     <!--페이지-->
-    <nav aria-label="Page navigation example" >
+    <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item disabled" th:classappend="${startPage == sells.pageable.pageNumber + 1} ? 'disabled'">
                 <a class="page-link" th:href="@{/(page=${sells.pageable.pageNumber - 1})}" tabindex="-1">Previous</a>

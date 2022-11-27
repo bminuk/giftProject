@@ -1,5 +1,6 @@
 package com.gift.dto.exchange;
 
+import com.gift.constant.Category;
 import com.gift.dto.request.RequestDto;
 import com.gift.dto.request.RequestImgDto;
 import com.gift.entity.exchange.Exchange;

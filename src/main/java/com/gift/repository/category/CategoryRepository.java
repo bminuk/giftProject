@@ -1,4 +1,4 @@
-package com.gift.repository.sell;
+package com.gift.repository.category;
 
 import com.gift.entity.sell.Sell;
 import org.springframework.data.domain.Page;
@@ -8,7 +8,7 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import java.util.Optional;
 
-public interface SellRepository extends JpaRepository<Sell, Long>, QuerydslPredicateExecutor<Sell>, SellRepositoryCustom {
+public interface CategoryRepository extends JpaRepository<Sell, Long>, QuerydslPredicateExecutor<Sell>, CategoryRepositoryCustom {
 
     Page<Sell> findAll(Pageable pageable);
 
