@@ -46,17 +46,17 @@
   <div class="container">
     <div class="text-center">
       <div class="category" style="margin-left: 10px;">
-        <a href="category/all"><img src="/images/icon/all.png" width="60" height="60" style="margin-top: 5px;">
+        <a href="/category/all"><img src="/images/icon/all.png" width="60" height="60" style="margin-top: 5px;">
           <h6 class=" fw-bolder text-black mt-2">전체</h6></a>
-        <a href="category/video"><img src="/images/icon/video.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+        <a href="/category/video"><img src="/images/icon/video.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
           <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">영상</h6></a>
-        <a href="category/it"><img src="/images/icon/computer.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+        <a href="/category/it"><img src="/images/icon/computer.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
           <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">IT</h6></a>
-        <a href="category/design"><img src="/images/icon/design.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+        <a href="/category/design"><img src="/images/icon/design.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
           <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">디자인</h6></a>
-        <a href="category/lang"><img src="/images/icon/translate.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+        <a href="/category/language"><img src="/images/icon/translate.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
           <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">언어</h6></a>
-        <a href="category/hobby"><img src="/images/icon/activity.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+        <a href="/category/hobby"><img src="/images/icon/activity.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
           <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">취미</h6></a>
       </div>
       <div class="make">
@@ -69,6 +69,17 @@
       </div>
     </div>
     <div class="row">
+      <form th:action="@{/category/exchangeBoard/search}" role="form" method="get"
+            th:object="${searchDto}" class="d-flex" style="margin-bottom: 20px;">
+        <div>
+          <select th:field="*{searchBy}" class="form-select" style="width:100px; margin-right: 5px;">
+            <option value="title">제목</option>
+            <option value="content">내용</option>
+          </select>
+        </div>
+        <input th:field="*{searchQuery}" class="form-control me-sm-2" type="text" placeholder="게시물 검색">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit" style="background-color: #fff; color: #000000;">Search</button>
+      </form>
       <div class="col-lg-4 col-sm-6 mb-4" th:each="exchange, status: ${exchanges.getContent()}">
         <div class="portfolio-item" >
           <a class="portfolio-link" th:href="'/newPost/exchange/' + ${exchange.id}">

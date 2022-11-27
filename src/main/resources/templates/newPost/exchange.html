@@ -72,16 +72,16 @@
           <form role="form" method="post" enctype="multipart/form-data" th:object="${exchangeDto}">
 
             <input type="hidden" th:field="*{id}">
-            <div class="form-group">
-              <label class="col-form-label mt-4" for="inputDefault">분야</label>
-              <select th:field="*{exchangeCategory}" class="custom-select">
-                <option value="VIDEO">영상</option>
-                <option value="IT">IT</option>
-                <option value="DESIGN">디자인</option>
-                <option value="LANGUAGE">언어</option>
-                <option value="HOBBY">취미</option>
-              </select>
-            </div>
+<!--            <div class="form-group">-->
+<!--              <label class="col-form-label mt-4" for="inputDefault">분야</label>-->
+<!--              <select th:field="*{exchangeCategory}" class="custom-select">-->
+<!--                <option value="VIDEO">영상</option>-->
+<!--                <option value="IT">IT</option>-->
+<!--                <option value="DESIGN">디자인</option>-->
+<!--                <option value="LANGUAGE">언어</option>-->
+<!--                <option value="HOBBY">취미</option>-->
+<!--              </select>-->
+<!--            </div>-->
             <label class="col-form-label mt-4" for="inputDefault">원하는 상대의 재능</label>
             <input type="text" class="form-control" th:field="*{exchangeTitle}" placeholder="판매 서비스명 입력" id="inputDefault">
             <p th:if="${#fields.hasErrors('exchangeTitle')}" th:errors="*{exchangeTitle}" class="fieldError">Incorrect data</p>

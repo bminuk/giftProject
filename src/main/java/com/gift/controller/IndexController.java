@@ -17,10 +17,10 @@ import java.util.List;
 @Controller
 public class IndexController {
 
-@Autowired
-private SellRepository sellRepository;
-@Autowired
-private SellImgRepository sellImgRepository;
+    @Autowired
+    private SellRepository sellRepository;
+    @Autowired
+    private SellImgRepository sellImgRepository;
     @GetMapping(value = "/")
     public String main(@PageableDefault(size = 6) Pageable pageable, Model model){
 

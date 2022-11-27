@@ -2,14 +2,19 @@ package com.gift.service.member;
 
 //import com.gift.auth.PrincipalDetails;
 import com.gift.auth.PrincipalDetails;
+import com.gift.dto.member.MemberDto;
 import com.gift.entity.member.Member;
 import com.gift.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 @Transactional
@@ -40,5 +45,15 @@ public class MemberService implements UserDetailsService{
 
 
         return new PrincipalDetails(member);
+    }
+
+    @Transactional(readOnly = true)
+    public MemberDto getMemberDto(Authentication authentication) {
+        PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
+        Member member = principalDetails.getUser();
+        long id = member.getId();
+        Member accessMember = memberRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        MemberDto memberDto = MemberDto.of(accessMember);
+        return memberDto;
     }
 }

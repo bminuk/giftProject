@@ -8,12 +8,14 @@ import com.gift.repository.member.MemberRepository;
 import com.gift.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 
@@ -72,7 +74,18 @@ public class MemberController {
         return "/member/memberLogin";
     }
 
-    //잘좀해봐 신민영
+    @GetMapping(value = "/myPage")
+    public String memberDt(Authentication authentication, Model model) {
+        try{
+            MemberDto memberDto = memberService.getMemberDto(authentication);
+            model.addAttribute("memberDto", memberDto);
+        } catch (EntityNotFoundException e) {
+            model.addAttribute("errorMessage", "멤버 정보를 입력해주세요.");
+            model.addAttribute("memberDto", new MemberDto());
+            return "/member/myPage";
+        }
+        return "/member/myPage";
+    }
 
 
 }

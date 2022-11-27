@@ -1,5 +1,6 @@
-package com.gift.repository.request;
+package com.gift.repository.sell;
 
+import com.gift.constant.Category;
 import com.gift.dto.request.MainRequestDto;
 import com.gift.dto.request.QMainRequestDto;
 import com.gift.dto.search.SearchDto;
@@ -20,75 +21,73 @@ import org.thymeleaf.util.StringUtils;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class RequestRepositoryCustomImpl implements RequestRepositoryCustom{
+public class SellRepositoryCustomImpl implements SellRepositoryCustom{
 
     private JPAQueryFactory queryFactory;
 
-    public RequestRepositoryCustomImpl(EntityManager em) {
-
+    public  SellRepositoryCustomImpl(EntityManager em) {
         this.queryFactory = new JPAQueryFactory(em);
     }
 
+
     private BooleanExpression searchByLike(String searchBy, String searchQuery) {
         if(StringUtils.equals("title", searchBy)) {
-            return QRequest.request.requestTitle.like("%" + searchQuery + "%");
+            return QSell.sell.title.like("%" + searchQuery + "%");
         } else if(StringUtils.equals("content", searchBy)) {
-            return QRequest.request.requestContent.like("%" + searchQuery + "%");
+            return QSell.sell.content.like("%" + searchQuery + "%");
         }
         return null;
     }
-
-
-    //타임리프로 값을 넘겨받아 if문으로 어떤 카테고리 검색할지 나누어 작성
     @Override
-    public Page<MainRequestDto> getMainRequestPage(Pageable pageable) {
-        QRequest request = QRequest.request;
-        QRequestImg requestImg = QRequestImg.requestImg;
+    public Page<MainSellDto> getMainSellPage(Pageable pageable) {
+        QSell sell = QSell.sell;
+        QSellImg sellImg = QSellImg.sellImg;
 
-        QueryResults<MainRequestDto> results = queryFactory
+        QueryResults<MainSellDto> results = queryFactory
                 .select(
-                new QMainRequestDto(
-                        request.id,
-                        request.requestTitle,
-                        requestImg.requestImgUrl)
-        )
-                .from(requestImg)
-                .join(requestImg.request, request)
-                .where(requestImg.requestRepImgYn.eq("Y"))
-                .orderBy(request.id.desc())
+                        new QMainSellDto(
+                                sell.id,
+                                sell.title,
+                                sellImg.sellImgUrl)
+                )
+                .from(sellImg)
+                .join(sellImg.sell, sell)
+                .where(sellImg.sellRepImgYn.eq("Y"))
+                .orderBy(sell.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetchResults();
 
-        List<MainRequestDto> content = results.getResults();
+        List<MainSellDto> content = results.getResults();
         long total = results.getTotal();
         return new PageImpl<>(content, pageable, total);
     }
 
     @Override
-    public Page<MainRequestDto> getSearchRequestPage(SearchDto searchDto, Pageable pageable) {
-        QRequest request = QRequest.request;
-        QRequestImg requestImg = QRequestImg.requestImg;
+    public Page<MainSellDto> getSearchSellPage(SearchDto searchDto, Pageable pageable) {
+        QSell sell = QSell.sell;
+        QSellImg sellImg = QSellImg.sellImg;
 
-        QueryResults<MainRequestDto> results = queryFactory
+        QueryResults<MainSellDto> results = queryFactory
                 .select(
-                        new QMainRequestDto(
-                                request.id,
-                                request.requestTitle,
-                                requestImg.requestImgUrl
+                        new QMainSellDto(
+                                sell.id,
+                                sell.title,
+                                sellImg.sellImgUrl
                         )
                 )
-                .from(requestImg)
-                .join(requestImg.request, request)
+                .from(sellImg)
+                .join(sellImg.sell, sell)
                 .where(searchByLike(searchDto.getSearchBy(), searchDto.getSearchQuery()))
-                .orderBy(QRequest.request.id.desc())
+                .orderBy(QSell.sell.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetchResults();
 
-        List<MainRequestDto> content = results.getResults();
+        List<MainSellDto> content = results.getResults();
         long total = results.getTotal();
         return new PageImpl<>(content, pageable,total)
                 ;    }
+
 
 }

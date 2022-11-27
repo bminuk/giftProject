@@ -3,6 +3,8 @@ package com.gift.service.request;
 import com.gift.auth.PrincipalDetails;
 import com.gift.dto.request.MainRequestDto;
 import com.gift.dto.request.RequestDto;
+import com.gift.dto.search.SearchDto;
+import com.gift.dto.sell.MainSellDto;
 import com.gift.entity.member.Member;
 import com.gift.entity.request.Request;
 import com.gift.entity.request.RequestImg;
@@ -51,6 +53,11 @@ public class RequestService {
     @Transactional(readOnly = true)
     public Page<MainRequestDto> getMainRequestPage(Pageable pageable) {
         return requestRepository.getMainRequestPage(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainRequestDto> getSearchRequestPage(SearchDto searchDto, Pageable pageable) {
+        return requestRepository.getSearchRequestPage(searchDto, pageable);
     }
 
 }
