@@ -91,4 +91,30 @@ public class RequestRepositoryCustomImpl implements RequestRepositoryCustom{
         return new PageImpl<>(content, pageable,total)
                 ;    }
 
+    @Override
+    public Page<MainRequestDto> getMemberRequestPage(Long id, Pageable pageable) {
+        QRequest request = QRequest.request;
+        QRequestImg requestImg = QRequestImg.requestImg;
+
+        QueryResults<MainRequestDto> results = queryFactory
+                .select(
+                        new QMainRequestDto(
+                                request.id,
+                                request.requestTitle,
+                                requestImg.requestImgUrl)
+                )
+                .from(requestImg)
+                .join(requestImg.request, request)
+                .where(request.member.id.eq(id))
+                .orderBy(request.id.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetchResults();
+
+        List<MainRequestDto> content = results.getResults();
+        long total = results.getTotal();
+        return new PageImpl<>(content, pageable, total);
+    }
+
+
 }

@@ -92,4 +92,29 @@ public class ExchangeRepositoryCustomImpl implements ExchangeRepositoryCustom{
         long total = results.getTotal();
         return new PageImpl<>(content, pageable,total)
                 ;    }
+
+    @Override
+    public Page<MainExchangeDto> getMemberExchangePage(Long id, Pageable pageable) {
+        QExchange exchange = QExchange.exchange;
+        QExchangeImg exchangeImg = QExchangeImg.exchangeImg;
+
+        QueryResults<MainExchangeDto> results = queryFactory
+                .select(
+                        new QMainExchangeDto(
+                                exchange.id,
+                                exchange.exchangeTitle,
+                                exchangeImg.exchangeImgUrl)
+                )
+                .from(exchangeImg)
+                .join(exchangeImg.exchange, exchange)
+                .where(exchange.member.id.eq(id))
+                .orderBy(exchange.id.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetchResults();
+
+        List<MainExchangeDto> content = results.getResults();
+        long total = results.getTotal();
+        return new PageImpl<>(content, pageable, total);
+    }
 }

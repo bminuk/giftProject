@@ -8,12 +8,14 @@ import com.gift.dto.search.SearchDto;
 import com.gift.dto.sell.MainSellDto;
 import com.gift.service.contest.ContestService;
 import com.gift.service.exchange.ExchangeService;
+import com.gift.service.member.MemberService;
 import com.gift.service.request.RequestService;
 import com.gift.service.sell.SellService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +36,8 @@ public class CategoryController {
     private final ContestService contestService;
 
     private final SellService sellService;
+
+    private final MemberService memberService;
 
     @GetMapping(value = {"/requestBoard", "/requestBoard/{page}"})
     public String requestBoard(SearchDto searchDto, @PathVariable("page") Optional<Integer> page, Model model) {
@@ -61,6 +65,25 @@ public class CategoryController {
         return "/category/requestBoard";
     }
 
+    @GetMapping(value = {"/requestBoard/member", "/requestBoard/member/{page}"})
+    public String requestMemberBoard(SearchDto searchDto, Authentication authentication, @PathVariable("page") Optional<Integer> page, Model model) {
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0,6);
+
+        model.addAttribute("searchDto", new SearchDto());
+
+        MemberDto memberDto = memberService.getMemberDto(authentication);
+        Long id = memberDto.getId();
+
+        System.out.println("=========================>" + id);
+
+        Page<MainRequestDto> requests = requestService.getMemberRequestPage(id, pageable);
+
+        model.addAttribute("requests", requests);
+        model.addAttribute("maxPage", 5);
+        return "/category/requestBoard";
+    }
+
+
     @GetMapping(value = {"/exchangeBoard", "/exchangeBoard/{page}"})
     public String exchangeBoard(SearchDto searchDto, @PathVariable("page") Optional<Integer> page, Model model) {
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0,6);
@@ -81,6 +104,24 @@ public class CategoryController {
         model.addAttribute("searchDto", new SearchDto());
 
         Page<MainExchangeDto> exchanges = exchangeService.getSearchExchangePage(searchDto, pageable);
+        model.addAttribute("exchanges", exchanges);
+        model.addAttribute("maxPage", 5);
+        return "/category/exchangeBoard";
+    }
+
+    @GetMapping(value = {"/exchangeBoard/member", "/exchangeBoard/member/{page}"})
+    public String exchangeMemberBoard(SearchDto searchDto, Authentication authentication, @PathVariable("page") Optional<Integer> page, Model model) {
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0,6);
+
+        model.addAttribute("searchDto", new SearchDto());
+
+        MemberDto memberDto = memberService.getMemberDto(authentication);
+        Long id = memberDto.getId();
+
+        System.out.println("=========================>" + id);
+
+        Page<MainExchangeDto> exchanges = exchangeService.getMemberExchangePage(id, pageable);
+
         model.addAttribute("exchanges", exchanges);
         model.addAttribute("maxPage", 5);
         return "/category/exchangeBoard";
@@ -112,6 +153,24 @@ public class CategoryController {
         return "/category/contestBoard";
     }
 
+    @GetMapping(value = {"/contestBoard/member", "/contestBoard/member/{page}"})
+    public String contestMemberBoard(SearchDto searchDto, Authentication authentication, @PathVariable("page") Optional<Integer> page, Model model) {
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0,6);
+
+        model.addAttribute("searchDto", new SearchDto());
+
+        MemberDto memberDto = memberService.getMemberDto(authentication);
+        Long id = memberDto.getId();
+
+        System.out.println("=========================>" + id);
+
+        Page<MainContestDto> contests = contestService.getMemberContestPage(id, pageable);
+
+        model.addAttribute("contests", contests);
+        model.addAttribute("maxPage", 5);
+        return "/category/contestBoard";
+    }
+
     @GetMapping(value = {"/all", "/all/{page}"})
     public String sellBoard(SearchDto searchDto, @PathVariable("page") Optional<Integer> page, Model model) {
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0,6);
@@ -138,6 +197,25 @@ public class CategoryController {
         model.addAttribute("maxPage", 5);
         return "/category/all";
     }
+
+    @GetMapping(value = {"/all/member", "/all/member/{page}"})
+    public String sellMemberBoard(SearchDto searchDto, Authentication authentication, @PathVariable("page") Optional<Integer> page, Model model) {
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0,6);
+
+        model.addAttribute("searchDto", new SearchDto());
+
+        MemberDto memberDto = memberService.getMemberDto(authentication);
+        Long id = memberDto.getId();
+
+        System.out.println("=========================>" + id);
+
+        Page<MainSellDto> sells = sellService.getMemberSellPage(id, pageable);
+
+        model.addAttribute("sells", sells);
+        model.addAttribute("maxPage", 5);
+        return "/category/all";
+    }
+
 
     @GetMapping(value = {"/video", "/video/{page}"})
     public String videoBoard(@PathVariable("page") Optional<Integer> page, Model model) {

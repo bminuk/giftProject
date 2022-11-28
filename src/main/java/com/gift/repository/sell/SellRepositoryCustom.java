@@ -10,4 +10,6 @@ public interface SellRepositoryCustom {
     Page<MainSellDto> getMainSellPage(Pageable pageable);
 
     Page<MainSellDto> getSearchSellPage(SearchDto searchDto, Pageable pageable);
+
+    Page<MainSellDto> getMemberSellPage(Long id, Pageable pageable);
 }

@@ -89,5 +89,30 @@ public class SellRepositoryCustomImpl implements SellRepositoryCustom{
         return new PageImpl<>(content, pageable,total)
                 ;    }
 
+    @Override
+    public Page<MainSellDto> getMemberSellPage(Long id, Pageable pageable) {
+        QSell sell = QSell.sell;
+        QSellImg sellImg = QSellImg.sellImg;
+
+        QueryResults<MainSellDto> results = queryFactory
+                .select(
+                        new QMainSellDto(
+                                sell.id,
+                                sell.title,
+                                sellImg.sellImgUrl)
+                )
+                .from(sellImg)
+                .join(sellImg.sell, sell)
+                .where(sell.member.id.eq(id))
+                .orderBy(sell.id.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetchResults();
+
+        List<MainSellDto> content = results.getResults();
+        long total = results.getTotal();
+        return new PageImpl<>(content, pageable, total);
+    }
+
 
 }

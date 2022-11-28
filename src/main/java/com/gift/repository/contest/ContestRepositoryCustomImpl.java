@@ -2,11 +2,15 @@ package com.gift.repository.contest;
 
 import com.gift.dto.contest.MainContestDto;
 import com.gift.dto.contest.QMainContestDto;
+import com.gift.dto.exchange.MainExchangeDto;
+import com.gift.dto.exchange.QMainExchangeDto;
 import com.gift.dto.request.MainRequestDto;
 import com.gift.dto.request.QMainRequestDto;
 import com.gift.dto.search.SearchDto;
 import com.gift.entity.contest.QContest;
 import com.gift.entity.contest.QContestImg;
+import com.gift.entity.exchange.QExchange;
+import com.gift.entity.exchange.QExchangeImg;
 import com.gift.entity.request.QRequest;
 import com.gift.entity.request.QRequestImg;
 import com.querydsl.core.QueryResults;
@@ -88,4 +92,29 @@ public class ContestRepositoryCustomImpl implements ContestRepositoryCustom{
         long total = results.getTotal();
         return new PageImpl<>(content, pageable,total)
                 ;    }
+
+    @Override
+    public Page<MainContestDto> getMemberContestPage(Long id, Pageable pageable) {
+        QContest contest = QContest.contest;
+        QContestImg contestImg = QContestImg.contestImg;
+
+        QueryResults<MainContestDto> results = queryFactory
+                .select(
+                        new QMainContestDto(
+                                contest.id,
+                                contest.title,
+                                contestImg.contestImgUrl)
+                )
+                .from(contestImg)
+                .join(contestImg.contest, contest)
+                .where(contest.member.id.eq(id))
+                .orderBy(contest.id.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetchResults();
+
+        List<MainContestDto> content = results.getResults();
+        long total = results.getTotal();
+        return new PageImpl<>(content, pageable, total);
+    }
 }
