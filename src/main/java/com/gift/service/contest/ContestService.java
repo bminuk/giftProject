@@ -3,6 +3,7 @@ package com.gift.service.contest;
 import com.gift.auth.PrincipalDetails;
 import com.gift.dto.contest.ContestDto;
 import com.gift.dto.contest.MainContestDto;
+import com.gift.dto.exchange.MainExchangeDto;
 import com.gift.dto.search.SearchDto;
 import com.gift.dto.sell.MainSellDto;
 import com.gift.entity.contest.Contest;
@@ -66,4 +67,8 @@ public class ContestService {
         return contestRepository.getSearchContestPage(searchDto, pageable);
     }
 
+    @Transactional(readOnly = true)
+    public Page<MainContestDto> getMemberContestPage(Long id, Pageable pageable) {
+        return contestRepository.getMemberContestPage(id, pageable);
+    }
 }

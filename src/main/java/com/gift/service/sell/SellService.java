@@ -88,4 +88,8 @@ public class SellService {
         return sellRepository.getSearchSellPage(searchDto, pageable);
     }
 
+    @Transactional(readOnly = true)
+    public Page<MainSellDto> getMemberSellPage(Long id, Pageable pageable) {
+        return sellRepository.getMemberSellPage(id, pageable);
+    }
 }

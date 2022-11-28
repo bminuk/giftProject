@@ -13,4 +13,6 @@ public interface RequestRepositoryCustom {
     Page<MainRequestDto> getMainRequestPage(Pageable pageable);
 
     Page<MainRequestDto> getSearchRequestPage(SearchDto searchDto, Pageable pageable);
+
+    Page<MainRequestDto> getMemberRequestPage(Long id, Pageable pageable);
 }

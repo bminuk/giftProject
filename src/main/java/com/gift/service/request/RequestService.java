@@ -60,4 +60,9 @@ public class RequestService {
         return requestRepository.getSearchRequestPage(searchDto, pageable);
     }
 
+    @Transactional(readOnly = true)
+    public Page<MainRequestDto> getMemberRequestPage(Long id, Pageable pageable) {
+        return requestRepository.getMemberRequestPage(id, pageable);
+    }
+
 }
