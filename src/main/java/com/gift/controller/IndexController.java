@@ -25,14 +25,6 @@ private SellImgRepository sellImgRepository;
     public String main(@PageableDefault(size = 6) Pageable pageable, Model model){
 
         Page<Sell> sells = sellRepository.findAll(pageable);
-        try {
-            Sell sell = sells.getContent().get(0);
-            List<SellImg> sellImgs = sellImgRepository.findBySellIdOrderByIdAsc(sell.getId());
-            model.addAttribute("imgsrc",sellImgs.get(0).getSellImgUrl());
-            System.out.println(sellImgs.get(0).getSellImgUrl());
-        }catch (Exception e){
-            System.out.println("sell 아직 없음");
-        }
 
         //List<SellImg> sellImgs = sellImgRepository.findBySellIdOrderByIdAsc(sell.getId());
         //System.out.println(sellImgs);

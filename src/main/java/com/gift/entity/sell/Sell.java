@@ -8,6 +8,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "sell")
@@ -40,6 +42,10 @@ public class Sell {
     @Enumerated(EnumType.STRING)
     @Column(name = "sell_category")
     private Category sellCategory;
+
+    @OneToMany(mappedBy = "sell")
+    private List<SellImg> sellImg = new ArrayList<>() ;
+
 
     public void updateSell(SellDto sellDto) {
         this.title = sellDto.getTitle();

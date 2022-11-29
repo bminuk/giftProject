@@ -36,6 +36,9 @@
     display: flex;
     justify-content:center;
     }
+    #img{
+    width="300"; height="300";
+    }
 </style>
 
 </head>
@@ -75,13 +78,12 @@
                 <div class="portfolio-item" >
                     <!--data-bs-toggle="modal" 나중에 섬네일 눌렀을 때 모달로 하고 싶으면 아래의 a태그 클래스에 이거 사용해야함 부트스트랩 인듯
                     th:href="@{/details/sellDetail}"-->
-                    <a class="portfolio-link" th:onclick="|location.href='@{/details/sellDetailsTest/{sellId}(sellId=${sell.id})}'|">
+                    <a class="portfolio-link" th:onclick="|location.href='@{/details/sellDetailsTest/{sellId}(sellId=${sell.id})}'|" >
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
-                        <img class="img-fluid" src="/images/testImage/test.jpg"
-                             alt="..."/>
-                    </a>
+                        <img id="img" class="img-fluid" th:src="${sell.getSellImg().get(0).getSellImgUrl()}">
+                    </a >
                     <div class="portfolio-caption">
                         <div class="portfolio-caption-heading" th:text="${sell.title}">Threads</div>
                         <div class="portfolio-caption-subheading text-muted" th:text="${sell.content}">Illustration</div>
