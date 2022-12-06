@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.util.List;
 
+
 @RequestMapping("/newPost")
 @Controller
 public class NewPostController {
@@ -89,10 +90,11 @@ public class NewPostController {
             sellService.saveSell(sellDto, sellImgFileList, authentication);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "글 등록 중 에러 발생하였습니다.");
-            return "/newPost/request";
+            return "/newPost/sell";
         }
         return "redirect:/";
     }
+
 
     @GetMapping(value = "/contest")
     public String contest(Model model){
@@ -102,7 +104,6 @@ public class NewPostController {
     @PostMapping(value = "/contest")
     public String saveContest(@Valid ContestDto contestDto, BindingResult bindingResult, Authentication authentication, Model model,
                               @RequestParam(value = "contestImgFile", required=false) List<MultipartFile> contestImgFileList){
-//        contestService.saveContest(contestDto);
         if(bindingResult.hasErrors()) {
             return "/newPost/contest";
         }

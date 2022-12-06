@@ -3,6 +3,9 @@ package com.gift.service.exchange;
 import com.gift.auth.PrincipalDetails;
 import com.gift.dto.exchange.ExchangeDto;
 import com.gift.dto.exchange.MainExchangeDto;
+import com.gift.dto.request.MainRequestDto;
+import com.gift.dto.search.SearchDto;
+import com.gift.dto.sell.MainSellDto;
 import com.gift.entity.exchange.Exchange;
 import com.gift.entity.exchange.ExchangeImg;
 import com.gift.entity.member.Member;
@@ -53,4 +56,15 @@ public class ExchangeService {
     public Page<MainExchangeDto> getMainExchangePage(Pageable pageable) {
         return exchangeRepository.getMainExchangePage(pageable);
     }
+
+    @Transactional(readOnly = true)
+    public Page<MainExchangeDto> getSearchExchangePage(SearchDto searchDto, Pageable pageable) {
+        return exchangeRepository.getSearchExchangePage(searchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainExchangeDto> getMemberExchangePage(Long id, Pageable pageable) {
+        return exchangeRepository.getMemberExchangePage(id, pageable);
+    }
+
 }

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thmeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout1}"
 >
 <head>
@@ -45,65 +45,68 @@
 
     <div class="container">
         <div class="text-center">
-            <div class="category">
-                <a href="category/all"><img src="/images/icon/all.png" width="60" height="60" style="margin-top: 5px;">
+            <div class="category" style="margin-left: 10px;">
+                <a href="/category/all"><img src="/images/icon/all.png" width="60" height="60" style="margin-top: 5px;">
                     <h6 class=" fw-bolder text-black mt-2">전체</h6></a>
-                <a href="category/video"><img src="/images/icon/video.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+                <a href="/category/video"><img src="/images/icon/video.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
                     <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">영상</h6></a>
-                <a href="category/it"><img src="/images/icon/computer.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+                <a href="/category/it"><img src="/images/icon/computer.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
                     <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">IT</h6></a>
-                <a href="category/design"><img src="/images/icon/design.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+                <a href="/category/design"><img src="/images/icon/design.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
                     <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">디자인</h6></a>
-                <a href="category/lang"><img src="/images/icon/translate.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+                <a href="/category/language"><img src="/images/icon/translate.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
                     <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">언어</h6></a>
-                <a href="category/hobby"><img src="/images/icon/activity.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+                <a href="/category/hobby"><img src="/images/icon/activity.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
                     <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">취미</h6></a>
             </div>
             <div class="make">
-                <a href="members/new"><img src="/images/icon/contest.png" width="60" height="60" style="margin-top: 5px;">
+                <a href="/category/contestBoard"><img src="/images/icon/contest.png" width="60" height="60" style="margin-top: 5px;">
                     <h6 class=" fw-bolder text-black mt-2">공모전</h6></a>
-                <a href="members/new"><img src="/images/icon/exchange.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+                <a href="/category/exchangeBoard"><img src="/images/icon/exchange.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
                     <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">교환</h6></a>
-                <a href="details/requestDetail"><img src="/images/icon/demand.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
+                <a href="/category/requestBoard"><img src="/images/icon/demand.png" width="60" height="60" style="margin-top: 5px; margin-left: 50px;">
                     <h6 class=" fw-bolder text-black mt-2" style="margin-left: 50px;">의뢰</h6></a>
             </div>
         </div>
         <div class="row">
-            <!--            <h2 class="section-heading text-uppercase mb-4">Portfolio</h2>-->
-            <div class="col-lg-4 col-sm-6 mb-4" th:each="sell : ${sells}">
-                <!-- Portfolio item 1-->
+            <div class="col-lg-4 col-sm-6 mb-4" th:each="sell, status: ${sells.getContent()}">
                 <div class="portfolio-item" >
-                    <!--data-bs-toggle="modal" 나중에 섬네일 눌렀을 때 모달로 하고 싶으면 아래의 a태그 클래스에 이거 사용해야함 부트스트랩 인듯-->
-                    <a class="portfolio-link" th:href="@{/details/sellDetail}">
+                    <a class="portfolio-link" th:href="'/newPost/sell/' + ${sell.id}">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
-                        <img class="img-fluid" src="/images/testImage/test.jpg"
-                             alt="..."/>
+                        <img th:src="${sell.sellImgUrl}" width="300" height="300">
                     </a>
                     <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading" th:text="${sell.title}">Threads</div>
-                        <div class="portfolio-caption-subheading text-muted" th:text="${sell.content}">Illustration</div>
+                        <div class="portfolio-caption-heading" th:text="${sell.sellTitle}">Threads</div>
+                        <!--            <div class="portfolio-caption-subheading text-muted" th:text="${request.requestContent}">Illustration</div>-->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--페이지-->
-    <nav aria-label="Page navigation example" >
+
+    <div th:with="start=${(sells.number/maxPage)*maxPage + 1}, end=(${(sells.totalPages == 0) ? 1 : (start + (maxPage - 1) < sells.totalPages ? start + (maxPage - 1) : sells.totalPages)})" >
         <ul class="pagination justify-content-center">
-            <li class="page-item disabled" th:classappend="${startPage == sells.pageable.pageNumber + 1} ? 'disabled'">
-                <a class="page-link" th:href="@{/(page=${sells.pageable.pageNumber - 1})}" tabindex="-1">Previous</a>
-            </li>
-            <li class="page-item" th:each="num : ${#numbers.sequence(startPage, endPage)}">
-                <a class="page-link" th:href="@{/(page=${num-1})}" th:text="${num}">1</a>
+
+            <li class="page-item" th:classappend="${sells.number eq 0}?'disabled':''">
+                <a th:href="@{'/category/video/' + '${sells.number-1}}" aria-label='Previous' class="page-link">
+                    <span aria-hidden='true'>이전</span>
+                </a>
             </li>
 
-            <li class="page-item" th:classappend="${endPage == sells.pageable.pageNumber + 1} ? 'disabled'">
-                <a class="page-link" th:href="@{/(page=${sells.pageable.pageNumber + 1})}">Next</a>
+            <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${sells.number eq page-1}?'active':''">
+                <a th:href="@{'/category/video/' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
             </li>
+
+            <li class="page-item" th:classappend="${sells.number+1 ge sells.totalPages}?'disabled':''">
+                <a th:href="@{'/category/video/' + ${sells.number+1}}" aria-label='Next' class="page-link">
+                    <span aria-hidden='true'>다음</span>
+                </a>
+            </li>
+
         </ul>
-    </nav>
+    </div>
 
 
 </div>

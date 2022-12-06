@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout2}">
+
+	<head>
+		<title>Hyperspace by HTML5 UP</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/assets/css/main2.css" />
+		<noscript><link rel="stylesheet" href="/assets/css/noscript.css"/></noscript>
+	</head>
+	<body class="is-preload">
+	<div layout:fragment="content">
+		<!-- Sidebar -->
+		<section id="sidebar">
+			<div class="inner">
+				<nav>
+					<ul>
+						<li><a href="#intro">Profile</a></li>
+<!--						<li><a href="#one">Who we are</a></li>-->
+						<li><a href="#two">게시글 관리</a></li>
+<!--						<li><a href="#three">Profile</a></li>-->
+					</ul>
+				</nav>
+			</div>
+		</section>
+
+		<!-- Wrapper -->
+		<div id="wrapper">
+
+			<!-- Intro -->
+			<section id="intro" class="wrapper style1 fullscreen fade-up">
+				<div class="inner">
+					<div class="split style1" style="margin-bottom: 30px;">
+						<section>
+							<ul class="contact">
+								<img src="/images/icon/profile.png" style="width: 200px; height: 200px;">
+								<h1 style="margin-bottom: 15px;">Profile</h1>
+								<li>
+									<h3>EMAIL : </h3>
+									<h3 th:text="${memberDto.email}"></h3>
+								</li>
+								<li>
+									<h3>NAME : </h3>
+									<h3 th:text="${memberDto.name}"></h3>
+								</li>
+							</ul>
+						</section>
+					</div>
+				</div>
+			</section>
+
+			<section id="two" class="wrapper style3 fade-up">
+				<div class="inner">
+					<img src="/images/icon/myPage1.png" style="width: 200px; height: 200px;">
+					<h2 style="text-decoration: underline;">내가 쓴 글</h2>
+					<div class="features">
+						<section style="background-color: #001A40;">
+							<span class="icon solid major fa-code"></span>
+							<a href="/category/all/member"><h3 style="color: #ffffff;">재능 판매</h3></a>
+						</section>
+						<section style="background-color: #001A40;">
+							<span class="icon solid major fa-lock"></span>
+							<a href="/category/exchangeBoard/member"><h3 style="color: #ffffff;">재능 교환</h3></a>
+						</section>
+<!--						<section>-->
+<!--							<span class="icon solid major fa-cog"></span>-->
+<!--							<h3>재능 의뢰</h3>-->
+<!--						</section>-->
+<!--						<section>-->
+<!--							<span class="icon solid major fa-desktop"></span>-->
+<!--							<h3>공모전 모집</h3>-->
+<!--						</section>-->
+						<section style="background-color: #001A40;">
+							<span class="icon solid major fa-link"></span>
+							<a href="/category/requestBoard/member"><h3 style="color: #ffffff;">재능 의뢰</h3></a>
+						</section>
+						<section style="background-color: #001A40;">
+							<span class="icon major fa-gem"></span>
+							<a href="/category/contestBoard/member"><h3 style="color: #ffffff;">공모전 모집</h3></a>
+						</section>
+					</div>
+				</div>
+			</section>
+			<!-- Three -->
+<!--			<section id="three" class="wrapper style1 fade-up">-->
+<!--				<div class="inner">-->
+<!--					<h2>Profile</h2>-->
+<!--					</div>-->
+<!--			</section>-->
+
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer" class="wrapper style1-alt">
+			<div class="inner">
+				<ul class="menu">
+					<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</footer>
+
+		<!-- Scripts -->
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery.scrollex.min.js"></script>
+		<script src="/assets/js/jquery.scrolly.min.js"></script>
+		<script src="/assets/js/browser.min.js"></script>
+		<script src="/assets/js/breakpoints.min.js"></script>
+		<script src="/assets/js/util2.js"></script>
+		<script src="/assets/js/main2.js"></script>
+	</div>
+
+
+	</body>
+</html>

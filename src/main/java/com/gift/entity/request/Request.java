@@ -18,7 +18,7 @@ public class Request{
 
     @Id
     @Column(name="request_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false, length = 50, name = "request_title")

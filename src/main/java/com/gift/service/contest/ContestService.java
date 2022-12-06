@@ -3,6 +3,9 @@ package com.gift.service.contest;
 import com.gift.auth.PrincipalDetails;
 import com.gift.dto.contest.ContestDto;
 import com.gift.dto.contest.MainContestDto;
+import com.gift.dto.exchange.MainExchangeDto;
+import com.gift.dto.search.SearchDto;
+import com.gift.dto.sell.MainSellDto;
 import com.gift.entity.contest.Contest;
 import com.gift.entity.contest.ContestImg;
 import com.gift.entity.member.Member;
@@ -27,21 +30,14 @@ public class ContestService {
     private final ContestRepository contestRepository;
 
     private final ContestImgService contestImgService;
-    private final ContestImgRepository contestImgRepository;
+
 
     public Long saveContest(ContestDto contestDto, List<MultipartFile> contestImgFileList, Authentication authentication) throws Exception{
-
-        Contest contest = new Contest();
-        contest.setTitle(contestDto.getTitle());
-        contest.setField(contestDto.getField());
-        contest.setPromoter(contestDto.getPromoter());
-        contest.setTerm(contestDto.getTerm());
-        contest.setTarget(contestDto.getTarget());
-        contest.setSkill(contestDto.getSkill());
 
         PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
         Member member = principalDetails.getUser();
 
+        Contest contest = contestDto.createContest();
         contest.setMember(member);
         contestRepository.save(contest);
 
@@ -66,4 +62,13 @@ public class ContestService {
         return contestRepository.getMainContestPage(pageable);
     }
 
+    @Transactional(readOnly = true)
+    public Page<MainContestDto> getSearchContestPage(SearchDto searchDto, Pageable pageable) {
+        return contestRepository.getSearchContestPage(searchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainContestDto> getMemberContestPage(Long id, Pageable pageable) {
+        return contestRepository.getMemberContestPage(id, pageable);
+    }
 }
