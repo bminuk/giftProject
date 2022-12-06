@@ -23,7 +23,6 @@ import javax.validation.Valid;
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
-
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
 

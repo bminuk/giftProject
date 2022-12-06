@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thmeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <title>Login V8</title>
   <meta charset="UTF-8">
@@ -51,9 +51,6 @@
           </div>
             <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
           <div class="text-right p-t-13 p-b-23">
-            <!--						<span class="txt1">-->
-            <!--							ID찾기-->
-            <!--						</span>-->
             <a href="/members/idFind" class="txt2">
               ID/
             </a>
@@ -92,7 +89,6 @@
   </div>
 </div>
 
-=-->
 <script src="/js/main.js"></script>
 
 </body>

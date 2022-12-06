@@ -117,15 +117,11 @@
                   <button th:formaction="@{/newPost/request}" type="submit" style="margin-top: 30px;" class="login100-medi-btn">
                     업로드
                   </button>
+                <button type="button" style="display:inline-block;" onclick="location.href='/category/all'" class="login100-medi-btn">취소</button>
               </div>
                 <div th:unless="${#strings.isEmpty(requestDto.id)}" style="display:inline-block;">
                   <button th:formaction="@{'/newPost/request/' + ${requestDto.id} }" type="submit" style="margin-top: 30px; margin-left: 10px;" class="login100-medi-btn">
                     수정
-                  </button>
-                </div>
-                <div style="display:inline-block;">
-                  <button style="margin-top: 30px; margin-left: 10px;" class="login100-medi-btn">
-                    목록
                   </button>
                 </div>
               </div>
