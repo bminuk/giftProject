@@ -65,7 +65,7 @@
                     <div class="carousel-inner">
 
                         <div class="carousel-item active">
-                            <img th:src="${request.getRequestImg().get(0).getRequestImgUrl()}" class="d-block w-100" alt="...">
+                            <img th:src="${exchange.getExchangeImg().get(0).getExchangeImgUrl()}" class="d-block w-100" alt="...">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -86,46 +86,33 @@
             <section id="two" class="border-bottom">
                 <div class="container">
                     <header class="major">
-                        <h2 th:text="${request.requestTitle}"></h2>
-                        <p th:text="|${request.getRequestCategory().toString()}  Category|">Read Only</p>
+                        <h2>판매자가 원하는 기술</h2>
+                        <p th:text="${exchange.exchangeTitle}">Read Only</p>
                     </header>
 
                 </div>
 
             </section>
-            <!-- 가격 범위 -->
+            <!-- 본인의 재능 소개 -->
             <section id="three" class="border-bottom">
                 <div class="container">
                     <header class="major">
                         <br>
-                        <h4 t>가격 범위</h4>
-                        <p th:text="${request.requestRange}">Just an incredibly simple responsive site<br/>
+                        <h4 th:text="|${member.name}님의 보유 기술|">재능 소개</h4>
+                        <p th:text="${exchange.exchangeIntro}">Just an incredibly simple responsive site<br/>
                             template freebie by </p>
                     </header>
                 </div>
 
             </section>
 
-            <!-- 기간 -->
-            <section id="four" class="border-bottom">
-                <div class="container">
-                    <header class="major">
-                        <br>
-                        <h4>기간</h4>
-                        <p th:text="${request.requestDate}">Just an incredibly simple responsive site<br/>
-                            template freebie by </p>
-                    </header>
-                </div>
-
-            </section>
-
-            <!-- 원하는 기술 -->
+            <!-- 마감 일자 -->
             <section id="last" class="border-bottom">
                 <div class="container">
                     <header class="major">
                         <br>
-                        <h4>요구하는 기술</h4>
-                        <p th:text="${request.requestContent}">Just an incredibly simple responsive site<br/>
+                        <h4>마감 일자</h4>
+                        <p th:text="${exchange.exchangeDate}">Just an incredibly simple responsive site<br/>
                             template freebie by </p>
                     </header>
                 </div>

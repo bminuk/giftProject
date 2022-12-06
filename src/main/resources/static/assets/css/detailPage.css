@@ -12,19 +12,21 @@ margin-right: 300px;
 
 #header{
 position: fixed; top: 150px; right: 300px;
-padding-right: 60px;
-padding-left: 60px;
+padding-right: 40px;
+padding-left: 40px;
 }
 
-#two, #three, #four{
+
+#two, #three, #four, #five, #six{
 padding-top: 20px;
 }
 
- #three{
+ #last{
+ padding-top: 20px;
  padding-bottom: 150px;
  }
 
-h2, h3{
+h2, h3, h4{
     color:#4acaa8;
 }
 

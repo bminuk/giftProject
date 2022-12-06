@@ -65,7 +65,7 @@
                     <div class="carousel-inner">
 
                         <div class="carousel-item active">
-                            <img th:src="${request.getRequestImg().get(0).getRequestImgUrl()}" class="d-block w-100" alt="...">
+                            <img th:src="${contest.getContestImg().get(0).getContestImgUrl()}" class="d-block w-100" alt="...">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -86,52 +86,58 @@
             <section id="two" class="border-bottom">
                 <div class="container">
                     <header class="major">
-                        <h2 th:text="${request.requestTitle}"></h2>
-                        <p th:text="|${request.getRequestCategory().toString()}  Category|">Read Only</p>
+                        <h2 th:text="${contest.title}">Read Only</h2>
+                        <p th:text="|${contest.getContestCategory().toString()}  Category|">분야</p>
                     </header>
 
                 </div>
 
             </section>
-            <!-- 가격 범위 -->
-            <section id="three" class="border-bottom">
+            <!-- 주최 -->
+            <section  id="three" class="border-bottom">
                 <div class="container">
                     <header class="major">
-                        <br>
-                        <h4 t>가격 범위</h4>
-                        <p th:text="${request.requestRange}">Just an incredibly simple responsive site<br/>
+                        <h4>주최자</h4>
+                        <p th:text="${contest.promoter}">Just an incredibly simple responsive site<br/>
                             template freebie by </p>
                     </header>
                 </div>
 
             </section>
 
-            <!-- 기간 -->
+            <!-- 접수기간 -->
             <section id="four" class="border-bottom">
                 <div class="container">
                     <header class="major">
-                        <br>
-                        <h4>기간</h4>
-                        <p th:text="${request.requestDate}">Just an incredibly simple responsive site<br/>
+                        <h4>접수기간</h4>
+                        <p th:text="${contest.term}">Just an incredibly simple responsive site<br/>
                             template freebie by </p>
                     </header>
                 </div>
 
             </section>
-
-            <!-- 원하는 기술 -->
-            <section id="last" class="border-bottom">
+            <!-- 지원 가능 대상 -->
+            <section id="five" class="border-bottom">
                 <div class="container">
                     <header class="major">
-                        <br>
-                        <h4>요구하는 기술</h4>
-                        <p th:text="${request.requestContent}">Just an incredibly simple responsive site<br/>
+                        <h4>지원 가능 대상</h4>
+                        <p th:text="${contest.target}">Just an incredibly simple responsive site<br/>
                             template freebie by </p>
                     </header>
                 </div>
 
             </section>
+            <!-- 작성자 보유 기술 -->
+            <section id="last"  class="border-bottom">
+                <div class="container">
+                    <header class="major">
+                        <h4>작성자 보유 기술</h4>
+                        <p th:text="${contest.skill}">Just an incredibly simple responsive site<br/>
+                            template freebie by </p>
+                    </header>
+                </div>
 
+            </section>
 
 
         </div>

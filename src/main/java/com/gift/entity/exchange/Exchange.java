@@ -1,11 +1,14 @@
 package com.gift.entity.exchange;
 
+import com.gift.entity.contest.ContestImg;
 import com.gift.entity.member.Member;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="exchange")
@@ -31,5 +34,8 @@ public class Exchange {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @OneToMany(mappedBy = "exchange")
+    private List<ExchangeImg> exchangeImg = new ArrayList<>() ;
 
 }

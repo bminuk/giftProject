@@ -2,12 +2,15 @@ package com.gift.entity.request;
 
 import com.gift.constant.Category;
 import com.gift.dto.request.RequestDto;
+import com.gift.entity.exchange.ExchangeImg;
 import com.gift.entity.member.Member;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="request")
@@ -40,6 +43,9 @@ public class Request{
     @Enumerated(EnumType.STRING)
     @Column(name = "request_category")
     private Category requestCategory;
+
+    @OneToMany(mappedBy = "request")
+    private List<RequestImg> requestImg = new ArrayList<>() ;
 
     public void updateRequest(RequestDto requestDto) {
         this.requestTitle = requestDto.getRequestTitle();

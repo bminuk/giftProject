@@ -12,7 +12,10 @@
     <th:block th:fragment="css"> <link rel="stylesheet" href="/assets/css/detailPage.css"/></th:block>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-    <script>
+
+    <script th:inline="javascript">
+
+
         var IMP = window.IMP;
         IMP.init("imp81254021");
 
@@ -20,14 +23,12 @@
             IMP.request_pay({
                 pg : 'kakaopay.TC0ONETIME',
                 pay_method : 'card',
-                merchant_uid: "5704648713156156484156007",
-                name : '당근 10kg',
-                amount : 1004,
-                buyer_email : 'Iamport@chai.finance',
-                buyer_name : '아임포트 기술지원팀',
-                buyer_tel : '010-1234-5678',
-                buyer_addr : '서울특별시 강남구 삼성동',
-                buyer_postcode : '123-456'
+                merchant_uid: [[${uuid}]],
+                name : [[${sell.title}]],
+                amount : [[${sell.money}]],
+                buyer_email : [[${member.email}]],
+                buyer_name : [[${member.name}]],
+
             }, function (rsp) { // callback
                 if (rsp.success) {
                      m_redirect_url: "/"
@@ -90,30 +91,17 @@
                         <p th:text="${sell.content}">Just an incredibly simple responsive site<br/>
                             template freebie by <a href="http://html5up.net">HTML5 UP</a>.</p>
                     </header>
-                    <p>Faucibus sed lobortis aliquam lorem blandit. Lorem eu nunc metus col. Commodo id in arcu ante
-                        lorem ipsum sed accumsan erat praesent faucibus commodo ac mi lacus. Adipiscing mi ac commodo.
 
-
-
-
-
-                    </p>
                 </div>
 
             </section>
 
             <!-- Three -->
-            <section id="three" >
+            <section id="last" >
                 <div class="container">
                     <h3>가격 정보</h3>
                     <p th:text="${sell.money}">가격</p>
-                    <p th:text="${sell.getSellImg().get(0).toString()}">aucibus sed lobortis aliquam lorem blandit. Lorem eu nunc metus col. Commodo id in arcu ante
-                        lorem ipsum sed accumsan erat praesent faucibus commodo ac mi lacus. Adipiscing mi ac commodo.
-                        Vis aliquet tortor ultricies non ante erat nunc integer eu ante ornare amet commetus vestibulum
-                        blandit integer in curae ac faucibus integer non. Adipiscing cubilia aucibus sed lobortis aliquam lorem blandit. Lorem eu nunc metus col. Commodo id in arcu ante
-                        lorem ipsum sed accumsan erat praesent faucibus commodo ac mi lacus. Adipiscing mi ac commodo.
-                        Vis aliquet tortor ultricies non ante erat nunc integer eu ante ornare amet commetus vestibulum
-                        blandit integer in curae ac faucibus integer non. Adipiscing cubilia </p>
+
                 </div>
 
             </section>
@@ -125,25 +113,25 @@
     </div>
 
     <!--		프로필-->
-    <section id="header" class="border rounded-2 border-dark">
+    <section id="header" class="border border-3 rounded-2 border-dark" style="background-color: #f0fdfe;">
         <header>
-            <span class="image avatar"><img src="images/avatar.jpg" alt=""/></span>
-            <h1 id="logo" th:text="${member.name}"><a href="#">Willis Corto</a></h1>
-            <p th:text="${member.email}">I got reprogrammed by a rogue AI<br/>
+            <span class="image avatar d-flex justify-content-center"><img src="images/avatar.jpg" alt=""/></span>
+            <br>
+            <h1 id="logo" style="color:#001A40;" class="d-flex justify-content-center" >판매자 정보</h1>
+            <br>
+            <h3  th:text="${member.name}" style="color:black;" class="d-flex justify-content-center"><a href="#">Willis Corto</a></h3>
+            <br>
+            <p th:text="${member.email}" class="d-flex justify-content-center">I got reprogrammed by a rogue AI<br/>
                 and now I'm totally cray</p>
+            <br>
+            <a  class="d-flex justify-content-center" th:onclick="requestPay()">
+
+                <img src="/images/kakaopay.png" >
+            </a>
+            <br>
         </header>
-        <button type="button" class="btn btn-primary" th:onclick="requestPay()">
-            결제하기
-        </button>
-        <footer>
-            <ul class="icons">
-                <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-                <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-                <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-                <li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-                <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-            </ul>
-        </footer>
+
+
     </section>
 
 

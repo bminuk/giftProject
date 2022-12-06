@@ -2,11 +2,14 @@ package com.gift.entity.contest;
 
 import com.gift.constant.Category;
 import com.gift.entity.member.Member;
+import com.gift.entity.sell.SellImg;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "contest")
@@ -42,5 +45,8 @@ public class Contest {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @OneToMany(mappedBy = "contest")
+    private List<ContestImg> contestImg = new ArrayList<>() ;
 
 }

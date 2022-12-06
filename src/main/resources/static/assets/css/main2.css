@@ -3498,6 +3498,10 @@ input, select, textarea {
 		margin: 0 auto;
 	}
 
+    #wrapper {
+    margin-top: -50px;
+    }
+
 /* Footer */
 
 	#sidebar + #wrapper + #footer {
