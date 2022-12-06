@@ -10,7 +10,33 @@
     <title>Read Only by HTML5 UP</title>
 
     <th:block th:fragment="css"> <link rel="stylesheet" href="/assets/css/detailPage.css"/></th:block>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <script>
+        var IMP = window.IMP;
+        IMP.init("imp81254021");
 
+        function requestPay() {
+            IMP.request_pay({
+                pg : 'kakaopay.TC0ONETIME',
+                pay_method : 'card',
+                merchant_uid: "5704648713156156484156007",
+                name : '당근 10kg',
+                amount : 1004,
+                buyer_email : 'Iamport@chai.finance',
+                buyer_name : '아임포트 기술지원팀',
+                buyer_tel : '010-1234-5678',
+                buyer_addr : '서울특별시 강남구 삼성동',
+                buyer_postcode : '123-456'
+            }, function (rsp) { // callback
+                if (rsp.success) {
+                     m_redirect_url: "/"
+                } else {
+                    console.log(rsp);
+                }
+            });
+        }
+    </script>
 
 </head>
 
@@ -106,7 +132,7 @@
             <p th:text="${member.email}">I got reprogrammed by a rogue AI<br/>
                 and now I'm totally cray</p>
         </header>
-        <button type="button" class="btn btn-primary">
+        <button type="button" class="btn btn-primary" th:onclick="requestPay()">
             결제하기
         </button>
         <footer>
