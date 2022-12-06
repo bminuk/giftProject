@@ -42,7 +42,6 @@ public class Member {
         member.setPassword(password);
         member.setRole(Role.USER);
         return member;
-
     }
 
 //    public static Member kakaoMember(String name, String email, String k_password) {

@@ -56,4 +56,5 @@ public class MemberService implements UserDetailsService{
         MemberDto memberDto = MemberDto.of(accessMember);
         return memberDto;
     }
+
 }
