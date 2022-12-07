@@ -1,5 +1,7 @@
 package com.gift.entity.exchange;
 
+import com.gift.dto.contest.ContestDto;
+import com.gift.dto.exchange.ExchangeDto;
 import com.gift.entity.contest.ContestImg;
 import com.gift.entity.member.Member;
 import lombok.Getter;
@@ -37,5 +39,11 @@ public class Exchange {
 
     @OneToMany(mappedBy = "exchange")
     private List<ExchangeImg> exchangeImg = new ArrayList<>() ;
+
+    public void updateExchange(ExchangeDto exchangeDto) {
+        this.exchangeTitle = exchangeDto.getExchangeTitle();
+        this.exchangeIntro = exchangeDto.getExchangeIntro();
+        this.exchangeDate = exchangeDto.getExchangeDate();
+    }
 
 }

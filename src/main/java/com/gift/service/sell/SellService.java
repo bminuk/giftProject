@@ -4,10 +4,12 @@ import com.gift.auth.PrincipalDetails;
 import com.gift.dto.search.SearchDto;
 import com.gift.dto.sell.MainSellDto;
 import com.gift.dto.sell.SellDto;
+import com.gift.dto.sell.SellImgDto;
 import com.gift.entity.member.Member;
 import com.gift.entity.sell.Sell;
 import com.gift.entity.sell.SellImg;
 import com.gift.repository.category.CategoryRepository;
+import com.gift.repository.sell.SellImgRepository;
 import com.gift.repository.sell.SellRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -26,6 +29,7 @@ public class SellService {
 
     private final SellImgService sellImgService;
     private final SellRepository sellRepository;
+    private final SellImgRepository sellImgRepository;
 
     private final CategoryRepository categoryRepository;
 
@@ -52,6 +56,34 @@ public class SellService {
         }
         return sell.getId();
 
+    }
+
+    @Transactional(readOnly = true)
+    public SellDto sellDto(Long sellId){
+        Sell sell = sellRepository.findById(sellId).orElseThrow(EntityNotFoundException::new);
+        SellDto sellDto = SellDto.of(sell);
+
+        return sellDto;
+    }
+
+    public Long updateSell(SellDto sellDto, List<MultipartFile> sellImgFileList, Long sellId) throws Exception{
+        //상품 수정
+        Sell sell = sellRepository.findById(sellDto.getId())
+                .orElseThrow(EntityNotFoundException::new);
+        sell.updateSell(sellDto);
+        System.out.println("===========================>>>>>>>>>"+sellImgFileList.get(0).getName());
+        System.out.println("===========================>>>>>>>>>"+sellImgFileList.get(0).getName());
+
+//        //이미지 등록
+        SellImgDto sellImgDto = sellImgRepository.findBySellId(sellId);
+        System.out.println("===========================>>>>>>>>>"+sellImgDto.getSellImgName());
+        System.out.println("===========================>>>>>>>>>"+sellImgDto.getId());
+            sellImgService.updateSellImg(sellImgDto.getId(),
+                    sellImgFileList.get(0));
+
+
+
+        return sell.getId();
     }
 
     @Transactional(readOnly = true)

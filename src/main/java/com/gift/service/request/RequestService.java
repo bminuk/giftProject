@@ -1,10 +1,13 @@
 package com.gift.service.request;
 
 import com.gift.auth.PrincipalDetails;
+import com.gift.dto.exchange.ExchangeImgDto;
 import com.gift.dto.request.MainRequestDto;
 import com.gift.dto.request.RequestDto;
+import com.gift.dto.request.RequestImgDto;
 import com.gift.dto.search.SearchDto;
 import com.gift.dto.sell.MainSellDto;
+import com.gift.entity.exchange.Exchange;
 import com.gift.entity.member.Member;
 import com.gift.entity.request.Request;
 import com.gift.entity.request.RequestImg;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -65,4 +69,23 @@ public class RequestService {
         return requestRepository.getMemberRequestPage(id, pageable);
     }
 
+    public Long updateRequest(RequestDto requestDto, List<MultipartFile> requestImgFileList, Long requestId) throws Exception{
+
+        Request request= requestRepository.findById(requestId).orElseThrow(EntityNotFoundException::new);
+        request.updateRequest(requestDto);
+
+        RequestImgDto requestImgDto = requestImgRepository.findByRequestId(requestId);
+        requestImgService.updateExchangeImg(requestImgDto.getId(),requestImgFileList.get(0));
+
+
+
+
+
+        //contest 수정
+
+
+
+
+        return request.getId();
+    }
 }

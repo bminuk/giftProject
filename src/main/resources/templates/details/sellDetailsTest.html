@@ -48,9 +48,17 @@
 
     <!-- Wrapper -->
     <div id="wrapper" >
-
+ <section  id="ud" style="" th:if="${authMember.id == member.id}">
+                <a th:href="'/newPost/sell/' + ${sell.id}">
+                    <img src="/images/write.png" >
+                </a>
+                <a th:href="'/details/sellDelete/' + ${sell.id}">
+                    <img src="/images/delete.png" >
+                </a>
+            </section>
         <!-- Main -->
         <div id="main">
+<!--            row-vh d-flex flex-row align-items-baseline-->
 
             <!-- One -->
             <section id="one" >
@@ -69,16 +77,7 @@
                             <img th:src="${sell.getSellImg().get(0).getSellImgUrl()}" class="d-block w-100" alt="...">
                         </div>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+
                 </div>
 
             </section>
@@ -113,15 +112,15 @@
     </div>
 
     <!--		프로필-->
-    <section id="header" class="border border-3 rounded-2 border-dark" style="background-color: #f0fdfe;">
+    <section id="header" class="border border-3 rounded-3 border-dark" style="background-color: #001A40">
         <header>
             <span class="image avatar d-flex justify-content-center"><img src="images/avatar.jpg" alt=""/></span>
             <br>
-            <h1 id="logo" style="color:#001A40;" class="d-flex justify-content-center" >판매자 정보</h1>
+            <h1 id="logo" style="color:white;" class="d-flex justify-content-center" >판매자 정보</h1>
             <br>
-            <h3  th:text="${member.name}" style="color:black;" class="d-flex justify-content-center"><a href="#">Willis Corto</a></h3>
+            <h3  th:text="${member.name}" style="color:white;" class="d-flex justify-content-center"><a href="#">Willis Corto</a></h3>
             <br>
-            <p th:text="${member.email}" class="d-flex justify-content-center">I got reprogrammed by a rogue AI<br/>
+            <p th:text="${member.email}" class="d-flex justify-content-center" style="color:white;">I got reprogrammed by a rogue AI<br/>
                 and now I'm totally cray</p>
             <br>
             <a  class="d-flex justify-content-center" th:onclick="requestPay()">

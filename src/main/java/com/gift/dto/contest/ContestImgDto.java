@@ -10,6 +10,8 @@ import org.modelmapper.ModelMapper;
 @Getter @Setter
 public class ContestImgDto {
 
+    private Long id;
+
     private String title;
 
     private String field;       //분야
@@ -29,4 +31,5 @@ public class ContestImgDto {
     public static ContestImgDto of(ContestImg contestImg) {
         return modelMapper.map(contestImg, ContestImgDto.class);
     }
+
 }

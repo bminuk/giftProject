@@ -47,7 +47,14 @@
 
     <!-- Wrapper -->
     <div id="wrapper" >
-
+        <section  id="ud" style="" th:if="${authMember.id == member.id}">
+            <a th:href="'/newPost/exchange/' + ${exchange.id}">
+                <img src="/images/write.png" >
+            </a>
+            <a th:href="'/details/exchangeDelete/' + ${exchange.id}">
+                <img src="/images/delete.png" >
+            </a>
+        </section>
         <!-- Main -->
         <div id="main">
 

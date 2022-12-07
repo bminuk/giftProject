@@ -1,11 +1,14 @@
 package com.gift.service.exchange;
 
 import com.gift.auth.PrincipalDetails;
+import com.gift.dto.contest.ContestImgDto;
 import com.gift.dto.exchange.ExchangeDto;
+import com.gift.dto.exchange.ExchangeImgDto;
 import com.gift.dto.exchange.MainExchangeDto;
 import com.gift.dto.request.MainRequestDto;
 import com.gift.dto.search.SearchDto;
 import com.gift.dto.sell.MainSellDto;
+import com.gift.entity.contest.Contest;
 import com.gift.entity.exchange.Exchange;
 import com.gift.entity.exchange.ExchangeImg;
 import com.gift.entity.member.Member;
@@ -19,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
 import java.nio.channels.Pipe;
 import java.util.List;
 
@@ -67,4 +71,23 @@ public class ExchangeService {
         return exchangeRepository.getMemberExchangePage(id, pageable);
     }
 
+    public Long updateExchange(ExchangeDto exchangeDto, List<MultipartFile> exchangeImgFileList, Long exchangeId) throws Exception {
+
+        Exchange exchange = exchangeRepository.findById(exchangeId).orElseThrow(EntityNotFoundException::new);
+        exchange.updateExchange(exchangeDto);
+
+        ExchangeImgDto exchangeImgDto = exchangeImgRepository.findByExchangeId(exchangeId);
+        exchangeImgService.updateExchangeImg(exchangeImgDto.getId(),exchangeImgFileList.get(0));
+
+
+
+
+
+        //contest 수정
+
+
+
+
+        return exchange.getId();
+    }
 }

@@ -1,6 +1,8 @@
 package com.gift.entity.contest;
 
 import com.gift.constant.Category;
+import com.gift.dto.contest.ContestDto;
+import com.gift.dto.sell.SellDto;
 import com.gift.entity.member.Member;
 import com.gift.entity.sell.SellImg;
 import lombok.Getter;
@@ -48,5 +50,13 @@ public class Contest {
 
     @OneToMany(mappedBy = "contest")
     private List<ContestImg> contestImg = new ArrayList<>() ;
+
+    public void updateContest(ContestDto contestDto) {
+        this.title = contestDto.getTitle();
+        this.term = contestDto.getTerm();
+        this.promoter = contestDto.getPromoter();
+        this.skill = contestDto.getSkill();
+        this.contestCategory = contestDto.getContestCategory();
+    }
 
 }
